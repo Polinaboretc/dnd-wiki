@@ -14,7 +14,7 @@ function displayMonsters(result) {
     // console.log('indexes', monstersKeysArray);
 
     const monstersTemplate = ` 
-        <a href="#MONSTERSLINK" target="_blank"><img src ="#MONSTERSIMG" alt ="alt img" class="monsters-img"></a>
+        <a href="#MONSTERSLINK" target="_blank"><img src ="#MONSTERSIMG" alt ="#MONSTERSALT" class="monsters-img"></a>
         <a href="#MONSTERSLINK" target="_blank">#MONSTERSNOME</a><br>` 
 
     const monstersContainer = document.body; 
@@ -24,6 +24,7 @@ function displayMonsters(result) {
 
         const newMonstersLink = './monsters/' + result.results[key].url + '/index.html' 
         const newMonstersTemplate = monstersTemplate.replace("#MONSTERSIMG", './pictures/' + result.results[key].index + '.jpg') 
+                                                    .replace("#MONSTERSALT", result.results[key].index)
                                                     .replace("#MONSTERSLINK", newMonstersLink) 
                                                     .replace("#MONSTERSNOME", result.results[key].name); 
 
