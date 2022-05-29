@@ -22,7 +22,10 @@ function displayMonsters(result) {
     for (const [key, value] of Object.entries(result.results)) {
         console.log('chiave', key, 'valore', value); 
 
-        const newMonstersLink = './pages' + result.results[key].url; 
+        const newMonstersLink = './' + 
+                                result.results[key].index + 
+                                '.html'; 
+
         const newMonstersTemplate = monstersTemplate.replace("#MONSTERSLINKIMG", newMonstersLink)     
                                                     .replace("#MONSTERSIMG", './pictures/' + result.results[key].index + '.jpg') 
                                                     .replace("#MONSTERSALT", result.results[key].index)
