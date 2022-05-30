@@ -21,6 +21,7 @@ function displayAboleth(result) {
         <h2>#ABOLETHNAME:</h2> 
         <h3 id="#ID">#DESCRIPTION</h3> 
         ` 
+        //  CREARE SOTTOGOGGETI CON ID UNICO
     const abolethContainer = document.body; 
 
     // for (let i = 0; i < abolethArray.length; i++) {
