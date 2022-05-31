@@ -3,7 +3,7 @@ const BASE_URL = "https://www.dnd5eapi.co/api/monsters/aboleth";
 function initAboleth() {
     fetch(BASE_URL) 
     .then(response => response.json()) 
-    .then(result => test(result)); 
+    .then(result => displayMonster(result)); 
 } 
 
 
@@ -68,26 +68,30 @@ function displayMonster(result) {
 
 initAboleth();
 
-function test(result){
-    console.log(result);
-    let arrayActions = []
-    if(result.actions) arrayActions = result.actions
-    for (const action of arrayActions) {
-        console.log('nome:', action.name)
-        console.log('description:', action.desc);
-        if(action.attack_bonus) console.log('att bonus:', action.attack_bonus)
-        if (action.usage) { 
-            let usageString = 'usage: '; 
-            if (action.usage.times) usageString += action.usage.times; 
-            usageString += action.usage.type
-            if(action.usage.dice) usageString += ' dice:' + action.usage.dice
-            if(action.usage.min_value) usageString += ' min value: ' + action.usage.min_value
-            console.log(usageString); 
-        } 
-        if(action.options) { 
-            console.log('options', action.options);
-            // let optionsString = 'options: '; 
-        //     if(action.options.) 
-        }
-    }
-}
+// function test(result){
+//     console.log(result);
+//     let arrayActions = []
+//     if(result.actions) arrayActions = result.actions
+//     for (const action of arrayActions) {
+//         console.log('nome:', action.name)
+//         console.log('description:', action.desc);
+//         if(action.attack_bonus) console.log('att bonus:', action.attack_bonus)
+//         if (action.usage) { 
+//             let usageString = 'usage: '; 
+//             if (action.usage.times) usageString += action.usage.times; 
+//             usageString += action.usage.type
+//             if(action.usage.dice) usageString += ' dice:' + action.usage.dice
+//             if(action.usage.min_value) usageString += ' min value: ' + action.usage.min_value
+//             console.log(usageString); 
+//         } 
+//         if(action.options) { 
+//             console.log('options', action.options);
+//             let optionsString = 'options: '; 
+//             console.log(action.options.choose);
+//             // console.log('from', action.options.from) 
+//             for (const option of action.options.from) {
+//                 console.log(option);
+//             }
+//         }
+//     }
+// }
