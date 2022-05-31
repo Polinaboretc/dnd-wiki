@@ -14,3 +14,8 @@ body, html{
     background-position: center center; 
     margin: 2px 5px;
 }
+
+.single-monster-container{
+    display: flex;
+    align-items: center;
+}
