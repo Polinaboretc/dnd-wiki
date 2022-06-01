@@ -98,6 +98,7 @@ const BASE_URL = "https://www.dnd5eapi.co/api/monsters/"; //Link a cui aggiunger
 
 function displayMonsterInfo(monster) {
     document.title = monster.name  //Cambio il titolo della pagina con il nome del mostro 
+    
     const titleDiv = document.getElementById('creature-title'); 
     titleDiv.innerHTML = monster.name; 
     
@@ -140,8 +141,10 @@ function displayMonsterInfo(monster) {
 }
 
 function parseUrlParams() {   //prendo i parametri passati tramite URL dalla pagina precedente come avevamo fatto per l'app Todo del prof
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    const params = Object.fromEntries(urlSearchParams.entries());
+    const urlSearchParams = new URLSearchParams(window.location.search); 
+    const params = Object.fromEntries(urlSearchParams.entries()); 
+    console.log('params', params);
+
     return params;
 }
 
@@ -168,8 +171,8 @@ function createAccordionElement(infosArray, infoName){
         #NAME
       </button>
     </h2>
-    <div id="collapse#NUMBER" class="accordion-collapse collapse show" aria-labelledby="headingOne">
-      <div class="accordion-body">
+    <div id="collapse#NUMBER" class="accordion-collapse collapse" aria-labelledby="headingOne"> 
+      <div class="accordion-body"> 
        #DESCRIPTION
       </div>
     </div>
