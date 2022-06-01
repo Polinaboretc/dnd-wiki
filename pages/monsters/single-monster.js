@@ -112,12 +112,15 @@ function displayMonsterInfo(monster) {
 
     const gridDiv = document.getElementById('creature-grid'); 
 
-    const specialAbilities = monster.special_abilities; 
+    const divSpecialAbilities = document.getElementById('spec-abilities')
+    divSpecialAbilities.appendChild(createAccordionElement(monster.special_abilities,'SpecialAbilities'))
+
+    const divActions = document.getElementById('actions')
+    divActions.appendChild(createAccordionElement(monster.actions, 'Actions'))
+
+    const divLegendaryAction = document.getElementById('legendary-actions')
+    divLegendaryAction.appendChild(createAccordionElement(monster.legendary_actions, 'LegendaryActions'))
     
-    for (const ability of abilities) {
-
-    } 
-
     let arrayActions = [];
     if (monster.actions) arrayActions = monster.actions  //Se il mostro può fare delle azioni, le mostro
     for (const action of arrayActions) {
@@ -152,20 +155,22 @@ function init(){
 }
 
 function createAccordionElement(infosArray, infoName){
+    console.log(infosArray);
     const divAccordionContainer = document.createElement('div')
     divAccordionContainer.className = 'accordion'
     const accordionId = 'accordion' + infoName 
+    divAccordionContainer.id = accordionId
 
     const accordionTemplate = `
     <div class="accordion-item">
     <h2 class="accordion-header" id="heading#NUMBER">
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse#NUMBER" aria-expanded="true" aria-controls="collapse#NUMBER">
-        Accordion Item #1
+        #NAME
       </button>
     </h2>
     <div id="collapse#NUMBER" class="accordion-collapse collapse show" aria-labelledby="headingOne">
       <div class="accordion-body">
-        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+       #DESCRIPTION
       </div>
     </div>
   </div>
@@ -173,7 +178,12 @@ function createAccordionElement(infosArray, infoName){
     for (let i = 0; i < infosArray.length; i++) {
         const info = infosArray[i]
         const myId = infoName + i
+        const newTemplate = accordionTemplate.replaceAll('#NUMBER', myId)
+            .replace('#NAME', info.name)
+            .replace('#DESCRIPTION', info.desc)
+        divAccordionContainer.innerHTML += newTemplate
     }
+    return divAccordionContainer;
 }
 
 init()
