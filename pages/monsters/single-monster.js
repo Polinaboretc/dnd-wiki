@@ -97,8 +97,28 @@ const BASE_URL = "https://www.dnd5eapi.co/api/monsters/"; //Link a cui aggiunger
 // }
 
 function displayMonsterInfo(monster) {
-    document.title = monster.name  //Cambio il titolo della pagina con il nome del mostro
-    let arrayActions = []
+    document.title = monster.name  //Cambio il titolo della pagina con il nome del mostro 
+    const titleDiv = document.getElementById('creature-title'); 
+    titleDiv.innerHTML = monster.name; 
+    
+    const imgDiv = document.getElementById('creature-img'); 
+    const img = document.createElement('img');
+    const imgSrc = './pictures/' + monster.index + '.jpg'; 
+    img.src = imgSrc; 
+    imgDiv.appendChild(img); 
+
+    const infoDiv = document.getElementById('creature-info'); 
+    infoDiv.innerHTML = monster.size + ' ' + monster.type + ', ' +  monster.alignment; 
+
+    const gridDiv = document.getElementById('creature-grid'); 
+
+    const specialAbilities = monster.special_abilities; 
+    
+    for (const ability of abilities) {
+
+    } 
+
+    let arrayActions = [];
     if (monster.actions) arrayActions = monster.actions  //Se il mostro può fare delle azioni, le mostro
     for (const action of arrayActions) {
         console.log('action name:', action.name)
@@ -130,4 +150,30 @@ function init(){
         .then(result => displayMonsterInfo(result))
         .catch(error => console.log(error))
 }
+
+function createAccordionElement(infosArray, infoName){
+    const divAccordionContainer = document.createElement('div')
+    divAccordionContainer.className = 'accordion'
+    const accordionId = 'accordion' + infoName 
+
+    const accordionTemplate = `
+    <div class="accordion-item">
+    <h2 class="accordion-header" id="heading#NUMBER">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse#NUMBER" aria-expanded="true" aria-controls="collapse#NUMBER">
+        Accordion Item #1
+      </button>
+    </h2>
+    <div id="collapse#NUMBER" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+      <div class="accordion-body">
+        <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+      </div>
+    </div>
+  </div>
+    `
+    for (let i = 0; i < infosArray.length; i++) {
+        const info = infosArray[i]
+        const myId = infoName + i
+    }
+}
+
 init()
