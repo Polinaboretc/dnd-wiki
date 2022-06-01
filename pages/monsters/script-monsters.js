@@ -39,11 +39,9 @@ function createMonsterTemplate(monster){
 // in futuro dell'estetica. Manipolare bottoni e loro funzionalità
 // è molto più facile rispetto ai link
     const monstersTemplate = ` 
-        <div class="single-monster-container">
-            <img src ="#MONSTERSIMG" alt ="#MONSTERSALT" class="monsters-img">
-            #MONSTERSNOME
-            <button class="see-more">see more</button>
-        </div>`
+        <img src ="#MONSTERSIMG" alt ="#MONSTERSALT" class="monsters-img">
+        #MONSTERSNOME
+        <button class="see-more">see more</button>`
     const monsterImg = './pictures/' + monster.index + '.jpg'
     return monstersTemplate.replace('#MONSTERSIMG', monsterImg)
         .replace('#MONSTERSALT', monster.index)
