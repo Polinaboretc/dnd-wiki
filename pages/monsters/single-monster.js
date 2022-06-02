@@ -98,12 +98,15 @@ const BASE_URL = "https://www.dnd5eapi.co/api/monsters/"; //Link a cui aggiunger
 
 function displayMonsterInfo(monster) {
     document.title = monster.name  //Cambio il titolo della pagina con il nome del mostro 
+    const monsterArray = Object.keys(monster); 
+    console.log(monsterArray); 
     
     const titleDiv = document.getElementById('creature-title'); 
     titleDiv.innerHTML = monster.name; 
     
     const imgDiv = document.getElementById('creature-img'); 
-    const img = document.createElement('img');
+    const img = document.createElement('img'); 
+    img.classList.add('img-creature');
     const imgSrc = './pictures/' + monster.index + '.jpg'; 
     img.src = imgSrc; 
     imgDiv.appendChild(img); 
@@ -113,27 +116,39 @@ function displayMonsterInfo(monster) {
 
     const gridDiv = document.getElementById('creature-grid'); 
 
-    const divSpecialAbilities = document.getElementById('spec-abilities')
-    divSpecialAbilities.appendChild(createAccordionElement(monster.special_abilities,'SpecialAbilities'))
+    const divSpecialAbilities = document.getElementById('spec-abilities'); 
+    const specialAbilitiesTitle = document.createElement('h3'); 
+    const specialAbilitiesNode = document.createTextNode(monsterArray[24].toUpperCase()); 
+    specialAbilitiesTitle.appendChild(specialAbilitiesNode); 
+    divSpecialAbilities.appendChild(specialAbilitiesTitle);
+    divSpecialAbilities.appendChild(createAccordionElement(monster.special_abilities,'SpecialAbilities'));
 
-    const divActions = document.getElementById('actions')
-    divActions.appendChild(createAccordionElement(monster.actions, 'Actions'))
+    const divActions = document.getElementById('actions'); 
+    const actionsTitle = document.createElement('h3'); 
+    const actionsNode = document.createTextNode(monsterArray[25].toUpperCase()); 
+    actionsTitle.appendChild(actionsNode); 
+    divActions.appendChild(actionsTitle);
+    divActions.appendChild(createAccordionElement(monster.actions, 'Actions'));
 
-    const divLegendaryAction = document.getElementById('legendary-actions')
-    divLegendaryAction.appendChild(createAccordionElement(monster.legendary_actions, 'LegendaryActions'))
+    const divLegendaryAction = document.getElementById('legendary-actions'); 
+    const legendaryActionTitle = document.createElement('h3'); 
+    const legendaryActionNode = document.createTextNode(monsterArray[26].toUpperCase()); 
+    legendaryActionTitle.appendChild(legendaryActionNode); 
+    divLegendaryAction.appendChild(legendaryActionTitle);
+    divLegendaryAction.appendChild(createAccordionElement(monster.legendary_actions, 'LegendaryActions'));
     
     let arrayActions = [];
     if (monster.actions) arrayActions = monster.actions  //Se il mostro può fare delle azioni, le mostro
     for (const action of arrayActions) {
-        console.log('action name:', action.name)
+        console.log('action name:', action.name);
         console.log('description:', action.desc);
-        if (action.attack_bonus) console.log('att bonus:', action.attack_bonus)
+        if (action.attack_bonus) console.log('att bonus:', action.attack_bonus);
         if (action.usage) {
             let usageString = 'usage: ';
             if (action.usage.times) usageString += action.usage.times;
-            usageString += action.usage.type
-            if (action.usage.dice) usageString += ' dice:' + action.usage.dice
-            if (action.usage.min_value) usageString += ' min value: ' + action.usage.min_value
+            usageString += action.usage.type;
+            if (action.usage.dice) usageString += ' dice:' + action.usage.dice;
+            if (action.usage.min_value) usageString += ' min value: ' + action.usage.min_value;
             console.log(usageString);
         }
         
@@ -149,22 +164,22 @@ function parseUrlParams() {   //prendo i parametri passati tramite URL dalla pag
 }
 
 function init(){
-    const htmlParams = parseUrlParams()
-    const monsterUrl = BASE_URL + htmlParams.name 
+    const htmlParams = parseUrlParams();
+    const monsterUrl = BASE_URL + htmlParams.name; 
     fetch(monsterUrl)
         .then(response => response.json())
         .then(result => displayMonsterInfo(result))
-        .catch(error => console.log(error))
+        .catch(error => console.log(error));
 }
 
-function createAccordionElement(infosArray, infoName){
+function createAccordionElement(infosArray, infoName){ 
     console.log(infosArray);
     const divAccordionContainer = document.createElement('div')
-    divAccordionContainer.className = 'accordion'
-    const accordionId = 'accordion' + infoName 
-    divAccordionContainer.id = accordionId
+    divAccordionContainer.className = 'accordion';
+    const accordionId = 'accordion' + infoName; 
+    divAccordionContainer.id = accordionId; 
 
-    const accordionTemplate = `
+    const accordionTemplate = ` 
     <div class="accordion-item">
     <h2 class="accordion-header" id="heading#NUMBER">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse#NUMBER" aria-expanded="true" aria-controls="collapse#NUMBER">
@@ -179,14 +194,14 @@ function createAccordionElement(infosArray, infoName){
   </div>
     `
     for (let i = 0; i < infosArray.length; i++) {
-        const info = infosArray[i]
-        const myId = infoName + i
-        const newTemplate = accordionTemplate.replaceAll('#NUMBER', myId)
-            .replace('#NAME', info.name)
-            .replace('#DESCRIPTION', info.desc)
-        divAccordionContainer.innerHTML += newTemplate
+        const info = infosArray[i];
+        const myId = infoName + i;
+        const newTemplate = accordionTemplate.replaceAll('#NUMBER', myId) 
+                                             .replace('#NAME', info.name)
+                                             .replace('#DESCRIPTION', info.desc);
+        divAccordionContainer.innerHTML += newTemplate;
     }
     return divAccordionContainer;
 }
 
-init()
+init();

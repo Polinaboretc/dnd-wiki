@@ -4,4 +4,9 @@
 
 .accordion{
     margin-bottom: 8px;
+} 
+
+.img-creature{  
+    width: 90vw;
+    min-width: 310px
 }
