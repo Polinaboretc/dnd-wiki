@@ -105,6 +105,7 @@ function goMonsters() {
 }
 
 function displayMonsterInfo(monster) {
+    console.log('monster:', monster);
     document.title = monster.name  //Cambio il titolo della pagina con il nome del mostro 
     const monsterArray = Object.keys(monster); 
     console.log(monsterArray); 
@@ -147,27 +148,46 @@ function displayMonsterInfo(monster) {
 
     const gridDiv = document.getElementById('creature-grid'); 
 
-    const divSpecialAbilities = document.getElementById('spec-abilities'); 
-    const specialAbilitiesTitle = document.createElement('h3'); 
-    const specialAbilitiesNode = document.createTextNode(monsterArray[24].toUpperCase()); 
-    specialAbilitiesTitle.appendChild(specialAbilitiesNode); 
-    divSpecialAbilities.appendChild(specialAbilitiesTitle);
-    divSpecialAbilities.appendChild(createAccordionElement(monster.special_abilities,'SpecialAbilities'));
+    // const divSpecialAbilities = document.getElementById('spec-abilities'); 
+    // const specialAbilitiesTitle = document.createElement('h3'); 
+    // const specialAbilitiesNode = document.createTextNode(monsterArray[24].toUpperCase()); 
+    // specialAbilitiesTitle.appendChild(specialAbilitiesNode); 
+    // divSpecialAbilities.appendChild(specialAbilitiesTitle);
+    // divSpecialAbilities.appendChild(createAccordionElement(monster.special_abilities,'Special-Abilities'));
 
-    const divActions = document.getElementById('actions'); 
-    const actionsTitle = document.createElement('h3'); 
-    const actionsNode = document.createTextNode(monsterArray[25].toUpperCase()); 
-    actionsTitle.appendChild(actionsNode); 
-    divActions.appendChild(actionsTitle);
-    divActions.appendChild(createAccordionElement(monster.actions, 'Actions'));
+    // const divActions = document.getElementById('actions'); 
+    // const actionsTitle = document.createElement('h3'); 
+    // const actionsNode = document.createTextNode(monsterArray[25].toUpperCase()); 
+    // actionsTitle.appendChild(actionsNode); 
+    // divActions.appendChild(actionsTitle);
+    // divActions.appendChild(createAccordionElement(monster.actions, 'Actions'));
 
-    const divLegendaryAction = document.getElementById('legendary-actions'); 
-    const legendaryActionTitle = document.createElement('h3'); 
-    const legendaryActionNode = document.createTextNode(monsterArray[26].toUpperCase()); 
-    legendaryActionTitle.appendChild(legendaryActionNode); 
-    divLegendaryAction.appendChild(legendaryActionTitle);
-    divLegendaryAction.appendChild(createAccordionElement(monster.legendary_actions, 'LegendaryActions'));
+    // const divLegendaryAction = document.getElementById('legendary-actions'); 
+    // const legendaryActionTitle = document.createElement('h3'); 
+    // const legendaryActionNode = document.createTextNode(monsterArray[26].toUpperCase()); 
+    // legendaryActionTitle.appendChild(legendaryActionNode); 
+    // divLegendaryAction.appendChild(legendaryActionTitle);
+    // divLegendaryAction.appendChild(createAccordionElement(monster.legendary_actions, 'Legendary-Actions'));
     
+    // Dato che faccio una cosa simile 3 volte, creo una funzione
+
+    fillCreatureText(monster.special_abilities, 'Special-abilities')
+    fillCreatureText(monster.actions, 'Actions')
+    fillCreatureText(monster.legendary_actions, 'Legendary-actions')
+
+    function fillCreatureText(infosArray,infoName){ 
+        // infoName viene usato per: prendere il div dell'abilità, scrivere il titolo e viene passato a createAccordionElement()
+        // per creare ID unici per gli accordion
+        if(infosArray.length === 0) return //Faccio subito un check. Se l'array è vuoto, non riempo nemmeno il div e faccio un return vuoto
+        // Da valutare se non scrivere niente o magari metter un none, tipo: Actions: none
+        // Al momento se non ha actions, non crea nemmeno il titolo di actions.
+        const textContainer = document.getElementById(infoName.toLowerCase())
+        const title = document.createElement('h3')
+        const titleNode = document.createTextNode(infoName.replace('-', ' '))
+        textContainer.appendChild(title.appendChild(titleNode))
+        return textContainer.appendChild(createAccordionElement(infosArray, infoName))
+    }
+
     let arrayActions = [];
     if (monster.actions) arrayActions = monster.actions  //Se il mostro può fare delle azioni, le mostro
     for (const action of arrayActions) {
