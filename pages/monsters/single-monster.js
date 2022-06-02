@@ -115,21 +115,22 @@ function displayMonsterInfo(monster) {
     headerImg.src = './assets/d&d.png'; 
     headerDiv.appendChild(headerImg); 
 
-    function createbreadCrumbsElement(){ 
-      const breadCrumbsContainer = document.createElement('div'); 
-      breadCrumbsContainer.className = 'breadcrumbs'; 
+    const breadCrumbsContainer = document.createElement('div'); 
+    breadCrumbsContainer.className = 'breadcrumbs'; 
 
-      const breadCrumbsTemplate = ` 
+    const breadCrumbsTemplate = ` 
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="">Home</a></li>
-          <li class="breadcrumb-item"><a href="#">monster list</a></li>
-          <li class="breadcrumb-item active" aria-current="page">monsters</li>
-        </ol>
+          <button class="breadcrumb-item breadcrumb-button" onclick="goHome()">Home</button>
+          <button class="breadcrumb-item breadcrumb-button" onclick="goMonsters()">Monsters</button>
+          <button class="breadcrumb-item active breadcrumb-button" aria-current="page">#MONSTERNAME</button>
+          </ol>
       </nav>
       `
-    }
+    const newBreadCrumbsTemplate = breadCrumbsTemplate.replaceAll('#MONSTERNAME', monster.name); 
 
+    breadCrumbsContainer.innerHTML += newBreadCrumbsTemplate; 
+    headerDiv.appendChild(breadCrumbsContainer);
     
     const titleDiv = document.getElementById('creature-title'); 
     titleDiv.innerHTML = monster.name; 
