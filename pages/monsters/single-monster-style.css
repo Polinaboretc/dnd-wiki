@@ -20,4 +20,10 @@
 
 #creature-title{ 
     font-size: xx-large;
+} 
+
+.breadcrumb-button{ 
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
 }

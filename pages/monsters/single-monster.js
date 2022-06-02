@@ -96,6 +96,14 @@ const BASE_URL = "https://www.dnd5eapi.co/api/monsters/"; //Link a cui aggiunger
 //     }
 // }
 
+function goHome() {
+  window.location.href = '../../index.html';
+} 
+
+function goMonsters() {
+  window.location.href = './';
+}
+
 function displayMonsterInfo(monster) {
     document.title = monster.name  //Cambio il titolo della pagina con il nome del mostro 
     const monsterArray = Object.keys(monster); 

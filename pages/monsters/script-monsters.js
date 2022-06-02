@@ -6,6 +6,8 @@ function initMonsters() {
     .then(result => displayMonsters(result)); 
 } 
 
+
+
 function displayMonsters(result) {
     // Ho messo result.results in monsters  per rendere più intuitivo cosa si prende 
     const monsters = result.results  
