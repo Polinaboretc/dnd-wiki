@@ -175,19 +175,6 @@ function displayMonsterInfo(monster) {
     fillCreatureText(monster.actions, 'Actions')
     fillCreatureText(monster.legendary_actions, 'Legendary-actions')
 
-    function fillCreatureText(infosArray,infoName){ 
-        // infoName viene usato per: prendere il div dell'abilità, scrivere il titolo e viene passato a createAccordionElement()
-        // per creare ID unici per gli accordion
-        if(infosArray.length === 0) return //Faccio subito un check. Se l'array è vuoto, non riempo nemmeno il div e faccio un return vuoto
-        // Da valutare se non scrivere niente o magari metter un none, tipo: Actions: none
-        // Al momento se non ha actions, non crea nemmeno il titolo di actions.
-        const textContainer = document.getElementById(infoName.toLowerCase())
-        const title = document.createElement('h3')
-        const titleNode = document.createTextNode(infoName.replace('-', ' '))
-        textContainer.appendChild(title.appendChild(titleNode))
-        return textContainer.appendChild(createAccordionElement(infosArray, infoName))
-    }
-
     let arrayActions = [];
     if (monster.actions) arrayActions = monster.actions  //Se il mostro può fare delle azioni, le mostro
     for (const action of arrayActions) {
@@ -202,7 +189,6 @@ function displayMonsterInfo(monster) {
             if (action.usage.min_value) usageString += ' min value: ' + action.usage.min_value;
             console.log(usageString);
         }
-        
     }
 }
 
@@ -212,6 +198,19 @@ function parseUrlParams() {   //prendo i parametri passati tramite URL dalla pag
     console.log('params', params);
 
     return params;
+}
+
+function fillCreatureText(infosArray,infoName){ 
+    // infoName viene usato per: prendere il div dell'abilità, scrivere il titolo e viene passato a createAccordionElement()
+    // per creare ID unici per gli accordion
+    if(infosArray.length === 0) return //Faccio subito un check. Se l'array è vuoto, non riempo nemmeno il div e faccio un return vuoto
+    // Da valutare se non scrivere niente o magari metter un none, tipo: Actions: none
+    // Al momento se non ha actions, non crea nemmeno il titolo di actions.
+    const textContainer = document.getElementById(infoName.toLowerCase())
+    const title = document.createElement('h3')
+    const titleNode = document.createTextNode(infoName.replace('-', ' '))
+    textContainer.appendChild(title.appendChild(titleNode))
+    return textContainer.appendChild(createAccordionElement(infosArray, infoName))
 }
 
 function init(){
