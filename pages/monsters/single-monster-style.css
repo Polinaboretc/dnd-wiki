@@ -9,4 +9,15 @@
 .img-creature{  
     width: 90vw;
     min-width: 310px
+} 
+
+.img-header{ 
+    width: 100vw; 
+    height: 20vh; 
+    min-width: 300px; 
+    max-width: 45vw;
+} 
+
+#creature-title{ 
+    font-size: xx-large;
 }

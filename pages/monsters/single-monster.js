@@ -100,6 +100,28 @@ function displayMonsterInfo(monster) {
     document.title = monster.name  //Cambio il titolo della pagina con il nome del mostro 
     const monsterArray = Object.keys(monster); 
     console.log(monsterArray); 
+
+    const headerDiv = document.getElementById('header-div'); 
+    const headerImg = document.createElement('img'); 
+    headerImg.classList.add('img-header'); 
+    headerImg.src = './assets/d&d.png'; 
+    headerDiv.appendChild(headerImg); 
+
+    function createbreadCrumbsElement(){ 
+      const breadCrumbsContainer = document.createElement('div'); 
+      breadCrumbsContainer.className = 'breadcrumbs'; 
+
+      const breadCrumbsTemplate = ` 
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="">Home</a></li>
+          <li class="breadcrumb-item"><a href="#">monster list</a></li>
+          <li class="breadcrumb-item active" aria-current="page">monsters</li>
+        </ol>
+      </nav>
+      `
+    }
+
     
     const titleDiv = document.getElementById('creature-title'); 
     titleDiv.innerHTML = monster.name; 
