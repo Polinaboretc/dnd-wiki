@@ -167,11 +167,11 @@ function createAccordionElement(infosArray, infoName){
     const accordionTemplate = `
     <div class="accordion-item">
     <h2 class="accordion-header" id="heading#NUMBER">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse#NUMBER" aria-expanded="true" aria-controls="collapse#NUMBER">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse#NUMBER" aria-expanded="true" aria-controls="collapse#NUMBER">
         #NAME
       </button>
     </h2>
-    <div id="collapse#NUMBER" class="accordion-collapse collapse" aria-labelledby="headingOne"> 
+    <div id="collapse#NUMBER" class="accordion-collapse collapse " aria-labelledby="headingOne"> 
       <div class="accordion-body"> 
        #DESCRIPTION
       </div>
