@@ -12,8 +12,7 @@ function displayData(result) {  //  funione per mostrare array da object (result
     const keysArray = Object.keys(result);  //  array con chiavi e valori 
     console.log('keyvalues', keysArray);
 
-    const template = ` 
-        <a href="#LINK" target="_blank">#NOME</a><br> ` 
+    const template = ` <a href="#LINK" target="_blank">#NOME</a><br> ` 
 
     const container = document.body; 
 

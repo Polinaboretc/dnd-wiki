@@ -1,9 +1,14 @@
 const BASE_URL = "https://www.dnd5eapi.co/api/monsters"; 
 
+let monstersData = []
+
 function initMonsters() {
     fetch(BASE_URL) 
     .then(response => response.json()) 
-    .then(result => displayMonsters(result)); 
+    .then(result =>{
+        monstersData = result;
+        return displayMonsters(result)
+    }); 
 } 
 
 
@@ -14,14 +19,21 @@ function displayMonsters(result) {
     // Invece di scrivere tutto direttamente nel body, ho creato un contenitore apposito per i mostri
     // Ciò renderà futura gestione estetica molto più semplice
     const monstersContainer = document.getElementById('monsters-container')
+
     for (const monster of monsters) {
         const div = document.createElement('div')  // Creo il div che conterrà il singolo mostro
-        div.className = 'single-monster-container'
+        div.className = 'accordion-item single-monster-container'
         div.innerHTML = createMonsterTemplate(monster)  // Riempo il div con il template
         const seeMoreButton = div.querySelector('.see-more')
         seeMoreButton.onclick = () => goToMonsterPage(monster.index)  // Aggiungo al bottone la funzione goToMonsterPage()
         monstersContainer.appendChild(div)  // Aggiungo il div del mostro singolo al div che contiene tutti i mostri
     }
+}
+
+function search(){
+    const inputSearch = document.getElementById("input-search")
+    const text = initMonsters.value;
+    const filteredMonsters = monstersData.filter();
 }
 
 function goToMonsterPage(index) {
@@ -40,12 +52,23 @@ function createMonsterTemplate(monster){
 // bisognerà cliccare un bottone. Ho fatto ciò per rendere più facile la gestione
 // in futuro dell'estetica. Manipolare bottoni e loro funzionalità
 // è molto più facile rispetto ai link
-    const monstersTemplate = ` 
-        <img src ="#MONSTERSIMG" alt ="#MONSTERSALT" class="monsters-img">
-        #MONSTERSNOME
-        <button class="see-more">see more</button>`
+    const monstersTemplate = `
+    <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="##COLLAPSE_ID"  aria-controls="#COLLAPSE_ID">
+        <img src ="#MONSTERSIMG" alt ="#MONSTERSALT" class="monsters-img"> #MONSTERSNOME
+        </button>
+    </h2>
+    <div id="#COLLAPSE_ID" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+        <button class="see-more">see more</button>
+        </div>
+    </div>
+       `
     const monsterImg = './pictures/' + monster.index + '.jpg'
     return monstersTemplate.replace('#MONSTERSIMG', monsterImg)
-        .replace('#MONSTERSALT', monster.index)
-        .replace('#MONSTERSNOME', monster.name)
+    .replace('#MONSTERSALT', monster.index)
+    .replace('#COLLAPSE_ID', 'collpase'+monster.index)
+    .replace('#COLLAPSE_ID', 'collpase'+monster.index)
+    .replace('#COLLAPSE_ID', 'collpase'+monster.index)
+    .replace('#MONSTERSNOME', monster.name)
 }

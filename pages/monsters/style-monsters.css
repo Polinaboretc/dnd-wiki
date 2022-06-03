@@ -1,24 +1,23 @@
-body, html{ 
-    width: 100%;
-    height: 100%;
-    margin: 0px;
-    padding: 0px;
-    background-color: rgb(161, 161, 161);
-} 
-
 .monsters-img{ 
-    width: 100px;
-    height: 100px;
+    width: 35px;
+    height: 35px;
     background-repeat: no-repeat; 
     background-size: cover; 
     background-position: center center; 
-    margin: 2px 5px;
+    margin: 0px 18px 0 0;
 }
 
-.single-monster-container{
-    display: flex;
-    align-items: center;
+.single-monster-container {
+    margin: 10px 0;
+    box-shadow: 2px 2px 5px 1px #ddd;
 } 
 
+.accordion-item:not(:first-of-type){
+    border-top: 1px solid #DDD ;
+}
+
+#monsters-container{
+    margin-top: 80px;
+}
 
 
