@@ -1,3 +1,12 @@
+.logo-custom{ 
+    width: 45px;
+    height: 30px;
+} 
+
+#page-container{ 
+    margin-top: 60px;
+}
+
 #creature-info{ 
     font-style: italic;
 }
