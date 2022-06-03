@@ -6,20 +6,19 @@ function initMonsters() {
     fetch(BASE_URL) 
     .then(response => response.json()) 
     .then(result =>{
-        monstersData = result;
-        return displayMonsters(result)
+        monstersData = result.results;
+        return displayMonsters(result.results)
     }); 
 } 
 
 
 
-function displayMonsters(result) {
-    // Ho messo result.results in monsters  per rendere più intuitivo cosa si prende 
-    const monsters = result.results  
+function displayMonsters(monsters) {
     // Invece di scrivere tutto direttamente nel body, ho creato un contenitore apposito per i mostri
     // Ciò renderà futura gestione estetica molto più semplice
     const monstersContainer = document.getElementById('monsters-container')
-
+    // puliamo il contenitore
+    monstersContainer.innerHTML = ''
     for (const monster of monsters) {
         const div = document.createElement('div')  // Creo il div che conterrà il singolo mostro
         div.className = 'accordion-item single-monster-container'
@@ -32,8 +31,12 @@ function displayMonsters(result) {
 
 function search(){
     const inputSearch = document.getElementById("input-search")
-    const text = initMonsters.value;
-    const filteredMonsters = monstersData.filter();
+    const text = inputSearch.value;
+    const filteredMonsters = monstersData.filter(monster => {
+        return monster.name.toLowerCase().indexOf(text.toLowerCase()) === 0
+        // return monster.name.toLowerCase().includes(searchInput.toLowerCase())
+    });
+    displayMonsters(filteredMonsters);
 }
 
 function goToMonsterPage(index) {
