@@ -1,3 +1,11 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    background: #f9f9f9 url(./assets/body-background.jpg) repeat;
+    font-family: 'Roboto', sans-serif;
+}
+
 .monsters-img{ 
     width: 35px;
     height: 35px;
@@ -17,7 +25,14 @@
 }
 
 #monsters-container{
-    margin-top: 80px;
+    margin-top: 100px;
 }
 
+.navbar{
+  border-bottom: 2px solid #bc0f0f;
+}
 
+.accordion-button:not(.collapsed){
+  color: #bc0f0f;
+  background-color: transparent;
+}

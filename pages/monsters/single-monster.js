@@ -70,9 +70,9 @@ function parseUrlParams() {   //prendo i parametri passati tramite URL dalla pag
 
 function fillCreatureStats(monster){
     const template = `
-    <table>
+    <table class="table table-bordered bg-white text-center">
         <thead>
-            <tr>
+            <tr class="table-secondary">
                 <th>DEX</th>
                 <th>STR</th>
                 <th>INT</th>
@@ -83,12 +83,12 @@ function fillCreatureStats(monster){
         </thead>
         <tbody>
             <tr>
-                <th>#DEX</th>
-                <th>#STR</th>
-                <th>#INT</th>
-                <th>#CON</th>
-                <th>#WIS</th>
-                <th>#CHA</th>
+                <td>#DEX</td>
+                <td>#STR</td>
+                <td>#INT</td>
+                <td>#CON</td>
+                <td>#WIS</td>
+                <td>#CHA</td>
             </tr>
         </tbody>
 </table>`
@@ -100,7 +100,7 @@ function fillCreatureStats(monster){
 function fillGrid(monster, gridInfos){
     const gridDiv = document.getElementById('creature-grid')
     const table = document.createElement('table')
-    table.className = 'table-infos'
+    table.className = 'table table-bordered table-hover bg-white'
     table.innerHTML = fillTable(monster,gridInfos)
     gridDiv.appendChild(table)
 }
@@ -109,7 +109,7 @@ function fillTable(monster, gridInfos){  // Prendo in ingresso un array di infor
     const tableTemplate = `
         <tr class="info-tr">
             <th class="info-name-tr">#INFONAME</th>
-            <th class="info-content-tr">#INFOCONTENT</th>
+            <td class="info-content-tr">#INFOCONTENT</td>
         </tr>`
     let fullTable = ''  // Variable che riempirà il table genitore
     for(const info of gridInfos){
@@ -178,8 +178,9 @@ function fillCreatureText(infosArray,infoName){
     // Al momento se non ha actions, non crea nemmeno il titolo di actions.
     const textContainer = document.getElementById(infoName.toLowerCase())
     const title = document.createElement('h3')
-    const titleNode = document.createTextNode(infoName.replace('-', ' '))
-    textContainer.appendChild(title.appendChild(titleNode))
+    title.innerText = infoName.replace('-', ' ')
+    title.classList.add("info-name")
+    textContainer.appendChild(title)
     return textContainer.appendChild(createAccordionElement(infosArray, infoName))
 }
 

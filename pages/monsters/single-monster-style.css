@@ -4,7 +4,7 @@
 } 
 
 #page-container{ 
-    margin-top: 60px;
+    margin-top: 110px;
 }
 
 #creature-info{ 
@@ -37,13 +37,8 @@
     border: none;
 }
 
-.creature-grid{
-    display: grid;
-    width: 100%;
-    height: fit-content;
-}
 
-#creature-stats{
+/* #creature-stats{
     margin: 8px 0px;
 }
 #creature-stats th{
@@ -68,20 +63,20 @@
     text-align: center;
 }
 
-.table-infos{
-    width: 100%;
-}
-.info-name-tr{
-    border: 1px solid #303030;
-    padding: 0px 4px;
-    background-color: rgba(153, 153, 153, 0.356);
+*/
+
+.info-name{
+    font-size: 15px;
+    color: #bc0f0f;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 24px 0 8px;
 }
 
-.info-content-tr{
-    border: 1px solid #303030;
-    padding: 0px 4px;
-    font-weight: normal;
+.info-name-tr{
+    width: 240px;
 }
+
 
 /*  ber il button toggle */ 
 
