@@ -1,100 +1,5 @@
 const BASE_URL = "https://www.dnd5eapi.co/api/monsters/"; //Link a cui aggiungeremo l'index del mostro da cercare
 
-// function initAboleth() {
-//     fetch(BASE_URL) 
-//     .then(response => response.json()) 
-//     .then(result => displayMonster(result)); 
-// } 
-
-
-// function displayMonster(result) {
-//     console.log('name from objet', result); 
-
-//     const abolethArray = Object.keys(result);  //  array con chiavi e valori 
-//     // console.log('keyvalues', abolethArray); 
-
-//     const abolethTitle = document.createElement('h1'); 
-//     const abolethTitleNode = document.createTextNode(result.name) 
-//     abolethTitle.appendChild(abolethTitleNode); 
-//     document.body.appendChild(abolethTitle);
-
-//     const abolethTemplate = ` 
-//         <h2>#ABOLETHNAME:</h2> 
-//         <h3 id="#ID">#DESCRIPTION</h3> 
-//         ` 
-//         //  CREARE SOTTOGOGGETI CON ID UNICO
-//     const abolethContainer = document.body; 
-
-//     // for (let i = 0; i < abolethArray.length; i++) {
-//     //     const element = abolethArray[i];
-//     //     console.log('chiave:', abolethArray.); 
-//     //             const newAbolethTemplate = abolethTemplate.replace('#ABOLETHNAME', element.toUpperCase()); 
-
-                                                
-
-//     //     abolethContainer.innerHTML += newAbolethTemplate;
-//     // }
-
-//     for (const key of abolethArray) {
-//         // console.log('chiave:', key, 'valore:', result.speed); 
-        
-//         // console.log('speed', result.speed)
-        
-        
-//         const newAbolethTemplate = abolethTemplate.replace('#ABOLETHNAME', key.toUpperCase()) 
-//         .replace('#DESCRIPTION', result[key]) 
-//         .replace('#ID', key);
-        
-//         const speedTemplate = document.getElementById('speed'); 
-//         for (const [key, value] of Object.entries(result.speed)) {
-//             // console.log(key, value); 
-//             // const speedString = result.speed[key]
-//             // const speedKeyNode = document.createTextNode(speedString) 
-//             // speedTemplate.appendChild(speedKeyNode); 
-//             // newAbolethTemplate.appendChild(speedTemplate);
-
-
-//         }
-        
-        
-        
-
-        
-        
-        
-//         abolethContainer.innerHTML += newAbolethTemplate;
-//     }
-// }
-
-// initAboleth();
-
-// function test(result){
-//     console.log(result);
-//     let arrayActions = []
-//     if(result.actions) arrayActions = result.actions
-//     for (const action of arrayActions) {
-//         console.log('nome:', action.name)
-//         console.log('description:', action.desc);
-//         if(action.attack_bonus) console.log('att bonus:', action.attack_bonus)
-//         if (action.usage) { 
-//             let usageString = 'usage: '; 
-//             if (action.usage.times) usageString += action.usage.times; 
-//             usageString += action.usage.type
-//             if(action.usage.dice) usageString += ' dice:' + action.usage.dice
-//             if(action.usage.min_value) usageString += ' min value: ' + action.usage.min_value
-//             console.log(usageString); 
-//         } 
-//         if(action.options) { 
-//             console.log('options', action.options);
-//             let optionsString = 'options: '; 
-//             console.log(action.options.choose);
-//             // console.log('from', action.options.from) 
-//             for (const option of action.options.from) {
-//                 console.log(option);
-//             }
-//         }
-//     }
-// }
 
 function goHome() {
   window.location.href = '../../index.html';
@@ -108,7 +13,6 @@ function displayMonsterInfo(monster) {
     console.log('monster:', monster);
     document.title = monster.name  //Cambio il titolo della pagina con il nome del mostro 
     const monsterArray = Object.keys(monster); 
-    console.log(monsterArray); 
 
     const headerDiv = document.getElementById('header-div'); 
     const headerImg = document.createElement('img'); 
@@ -146,58 +50,124 @@ function displayMonsterInfo(monster) {
     const infoDiv = document.getElementById('creature-info'); 
     infoDiv.innerHTML = monster.size + ' ' + monster.type + ', ' +  monster.alignment; 
 
+    const statsDiv = document.getElementById('creature-stats')
+    statsDiv.innerHTML = fillCreatureStats(monster)
+
     const gridDiv = document.getElementById('creature-grid'); 
-
-    // const divSpecialAbilities = document.getElementById('spec-abilities'); 
-    // const specialAbilitiesTitle = document.createElement('h3'); 
-    // const specialAbilitiesNode = document.createTextNode(monsterArray[24].toUpperCase()); 
-    // specialAbilitiesTitle.appendChild(specialAbilitiesNode); 
-    // divSpecialAbilities.appendChild(specialAbilitiesTitle);
-    // divSpecialAbilities.appendChild(createAccordionElement(monster.special_abilities,'Special-Abilities'));
-
-    // const divActions = document.getElementById('actions'); 
-    // const actionsTitle = document.createElement('h3'); 
-    // const actionsNode = document.createTextNode(monsterArray[25].toUpperCase()); 
-    // actionsTitle.appendChild(actionsNode); 
-    // divActions.appendChild(actionsTitle);
-    // divActions.appendChild(createAccordionElement(monster.actions, 'Actions'));
-
-    // const divLegendaryAction = document.getElementById('legendary-actions'); 
-    // const legendaryActionTitle = document.createElement('h3'); 
-    // const legendaryActionNode = document.createTextNode(monsterArray[26].toUpperCase()); 
-    // legendaryActionTitle.appendChild(legendaryActionNode); 
-    // divLegendaryAction.appendChild(legendaryActionTitle);
-    // divLegendaryAction.appendChild(createAccordionElement(monster.legendary_actions, 'Legendary-Actions'));
-    
-    // Dato che faccio una cosa simile 3 volte, creo una funzione
 
     fillCreatureText(monster.special_abilities, 'Special-abilities')
     fillCreatureText(monster.actions, 'Actions')
     fillCreatureText(monster.legendary_actions, 'Legendary-actions')
-
-    let arrayActions = [];
-    if (monster.actions) arrayActions = monster.actions  //Se il mostro può fare delle azioni, le mostro
-    for (const action of arrayActions) {
-        console.log('action name:', action.name);
-        console.log('description:', action.desc);
-        if (action.attack_bonus) console.log('att bonus:', action.attack_bonus);
-        if (action.usage) {
-            let usageString = 'usage: ';
-            if (action.usage.times) usageString += action.usage.times;
-            usageString += action.usage.type;
-            if (action.usage.dice) usageString += ' dice:' + action.usage.dice;
-            if (action.usage.min_value) usageString += ' min value: ' + action.usage.min_value;
-            console.log(usageString);
-        }
-    }
+    const infosToPutInGrid = ['armor_class', 'hit_points', 'speed', 'proficiencies', 'damage_immunities', 'senses', 'challenge_rating', 'xp', 'hit_points', 'languages']
+    fillGrid(monster, infosToPutInGrid)
 }
 
 function parseUrlParams() {   //prendo i parametri passati tramite URL dalla pagina precedente come avevamo fatto per l'app Todo del prof
     const urlSearchParams = new URLSearchParams(window.location.search); 
     const params = Object.fromEntries(urlSearchParams.entries()); 
-    console.log('params', params);
-
     return params;
+}
+
+function fillCreatureStats(monster){
+    const template = `
+    <table>
+        <thead>
+            <tr>
+                <th>DEX</th>
+                <th>STR</th>
+                <th>INT</th>
+                <th>CON</th>
+                <th>WIS</th>
+                <th>CHA</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>#DEX</th>
+                <th>#STR</th>
+                <th>#INT</th>
+                <th>#CON</th>
+                <th>#WIS</th>
+                <th>#CHA</th>
+            </tr>
+        </tbody>
+</table>`
+    return template
+    .replace('#DEX', monster.dexterity).replace('#STR', monster.strength)
+    .replace('#INT', monster.intelligence).replace('#CON', monster.constitution)
+    .replace('#WIS', monster.wisdom).replace('#CHA', monster.charisma)
+}
+function fillGrid(monster, gridInfos){
+    const gridDiv = document.getElementById('creature-grid')
+    const table = document.createElement('table')
+    table.className = 'table-infos'
+    table.innerHTML = fillTable(monster,gridInfos)
+    gridDiv.appendChild(table)
+}
+
+function fillTable(monster, gridInfos){  // Prendo in ingresso un array di informazioni da mettere nel table
+    const tableTemplate = `
+        <tr class="info-tr">
+            <th class="info-name-tr">#INFONAME</th>
+            <th class="info-content-tr">#INFOCONTENT</th>
+        </tr>`
+    let fullTable = ''  // Variable che riempirà il table genitore
+    for(const info of gridInfos){
+        const infoName = (info.charAt(0).toUpperCase() + info.slice(1)).replace('_', ' ');
+        let infoContent
+        if(info === 'proficiencies'){  // Dato che le proficiencies sono oggetti complicati, ho creato una funzione per gestirle
+            fullTable += generateProficienciesText(monster.proficiencies, tableTemplate)
+            continue 
+        }
+        else if(typeof(monster[info]) === 'object'){  //Per oggetti come la speed, faccio qualche passaggio in più
+            if(monster[info].length === 0 ) infoContent = 'none';
+            else {
+                infoContent = JSON.stringify(monster[info]).replaceAll(/"|{|}|\[|\]|ft.|,/g, '').replaceAll('_', ' ')
+            }
+        }
+        else {
+            
+            infoContent = monster[info]
+        }
+        const modifiedTemplate = tableTemplate 
+            .replace('#INFONAME', infoName)
+            .replace('#INFOCONTENT', infoContent)
+            fullTable += modifiedTemplate
+    }
+    return fullTable
+}
+
+function generateProficienciesText(proficiencies, template){  //genera i saving throw e skill
+    let returnString = ''
+    const savingThrowsArray = []
+    const skillsArray = []
+    for(const proficiency of proficiencies){  // Controllo quanti saving throws ho
+        if(proficiency.proficiency.index.includes('throw')) 
+            savingThrowsArray.push([proficiency.proficiency.name, proficiency.value])
+        if(proficiency.proficiency.index.includes('skill'))  // Controllo quante skills ho
+        skillsArray.push([proficiency.proficiency.name, proficiency.value])
+    }
+    if(savingThrowsArray.length !== 0){
+        const infoName = 'Saving throws'
+        let infoContent = ''
+        for(const savingThrow of savingThrowsArray){
+            infoContent += savingThrow[0].replace('Saving Throw:', '') + ' +' + savingThrow[1]
+        }
+        returnString += template
+            .replace('#INFONAME', infoName)
+            .replace('#INFOCONTENT', infoContent)
+    }
+    if(skillsArray.length !== 0){
+        const infoName = 'Skills'
+        let infoContent = ''
+        for(const skill of skillsArray){
+            infoContent += skill[0].replace('Skill:', '') + ' +' + skill[1]
+        }
+        returnString += template
+            .replace('#INFONAME', infoName)
+            .replace('#INFOCONTENT', infoContent)
+    }
+    return returnString
 }
 
 function fillCreatureText(infosArray,infoName){ 
@@ -223,7 +193,6 @@ function init(){
 }
 
 function createAccordionElement(infosArray, infoName){ 
-    console.log(infosArray);
     const divAccordionContainer = document.createElement('div')
     divAccordionContainer.className = 'accordion';
     const accordionId = 'accordion' + infoName; 
@@ -246,9 +215,10 @@ function createAccordionElement(infosArray, infoName){
     for (let i = 0; i < infosArray.length; i++) {
         const info = infosArray[i];
         const myId = infoName + i;
-        const newTemplate = accordionTemplate.replaceAll('#NUMBER', myId) 
-                                             .replace('#NAME', info.name)
-                                             .replace('#DESCRIPTION', info.desc);
+        const newTemplate = accordionTemplate
+            .replaceAll('#NUMBER', myId) 
+            .replace('#NAME', info.name)
+            .replace('#DESCRIPTION', info.desc);
         divAccordionContainer.innerHTML += newTemplate;
     }
     return divAccordionContainer;

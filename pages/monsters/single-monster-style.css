@@ -1,3 +1,12 @@
+.logo-custom{ 
+    width: 45px;
+    height: 30px;
+} 
+
+#page-container{ 
+    margin-top: 60px;
+}
+
 #creature-info{ 
     font-style: italic;
 }
@@ -27,11 +36,48 @@
     border: none;
 }
 
-.logo-custom{ 
-    width: 45px;
-    height: 30px;
-} 
+.creature-grid{
+    display: grid;
+    width: 100%;
+    height: fit-content;
+}
 
-#page-container{ 
-    margin-top: 60px;
+#creature-stats{
+    margin: 8px 0px;
+}
+#creature-stats th{
+    border: 1px solid #303030;
+}
+#creature-stats table {
+    border-collapse: collapse;
+}
+
+#creature-stats table thead{
+    background-color: rgba(153, 153, 153, 0.356);
+    text-align: left;
+    
+}
+
+#creature-stats table thead th{
+    padding: 0px 4px;
+}
+
+#creature-stats table tbody th{
+    font-weight: normal;
+    text-align: center;
+}
+
+.table-infos{
+    width: 100%;
+}
+.info-name-tr{
+    border: 1px solid #303030;
+    padding: 0px 4px;
+    background-color: rgba(153, 153, 153, 0.356);
+}
+
+.info-content-tr{
+    border: 1px solid #303030;
+    padding: 0px 4px;
+    font-weight: normal;
 }
