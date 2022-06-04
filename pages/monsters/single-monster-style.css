@@ -1,37 +1,37 @@
-.logo-custom{ 
+.logo-custom {
     width: 45px;
     height: 30px;
-} 
+}
 
-#page-container{ 
+#page-container {
     margin-top: 110px;
 }
 
-#creature-info{ 
+#creature-info {
     font-style: italic;
 }
 
-.accordion{
+.accordion {
     margin-bottom: 8px;
-} 
+}
 
-.img-creature{  
+.img-creature {
     width: 100%;
-} 
+}
 
-.img-header{ 
+.img-header {
     width: 90vw;
     max-width: 500px;
     display: block;
     height: auto;
     margin: 0px auto;
-} 
+}
 
-#creature-title{ 
+#creature-title {
     font-size: xx-large;
-} 
+}
 
-.breadcrumb-button{ 
+.breadcrumb-button {
     background-color: transparent;
     background-repeat: no-repeat;
     border: none;
@@ -65,7 +65,7 @@
 
 */
 
-.info-name{
+.info-name {
     font-size: 15px;
     color: #bc0f0f;
     font-weight: 700;
@@ -73,54 +73,61 @@
     margin: 24px 0 8px;
 }
 
-.info-name-tr{
+.info-name-tr {
     width: 30%;
 }
 
 
-/*  ber il button toggle */ 
+/*  ber il button toggle */
 
 .sidepanel {
-    height: 45px; /* Specify a height */
-    width: 0; /* 0 width - change this with JavaScript */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Stay on top */
+    height: 45px;
+    /* Specify a height */
+    width: 0;
+    /* 0 width - change this with JavaScript */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Stay on top */
     bottom: 23px;
     right: 25px;
-    background-color: rgba(17, 17, 17, 0); /* Black*/
-    overflow-x: hidden; /* Disable horizontal scroll */ 
-    overflow-y: hidden; /* Disable horizontal scroll */
-    transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */ 
+    background-color: rgba(17, 17, 17, 0);
+    /* Black*/
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
+    overflow-y: hidden;
+    /* Disable horizontal scroll */
+    transition: 0.5s;
+    /* 0.5 second transition effect to slide in the sidepanel */
     border-radius: 10px 50px 50px 10px;
-  }
-  
-  /* Position and style the close button (top right corner) */
-  .sidepanel .closebtn {
+}
+
+/* Position and style the close button (top right corner) */
+.sidepanel .closebtn {
     position: absolute;
     font-size: 36px;
-    margin-left: 50px; 
+    margin-left: 50px;
     bottom: -10px;
-    right: 0px; 
+    right: 0px;
     color: rgba(213, 213, 213, 0);
-  }
-  
-  /* Style the button that is used to open the sidepanel */
-  .openbtn { 
-    width: 55px; 
+}
+
+/* Style the button that is used to open the sidepanel */
+.openbtn {
+    width: 55px;
     height: 55px;
     cursor: pointer;
     padding: 10px 15px;
-    border: none; 
+    border: none;
     background-color: rgb(213, 213, 213);
-    border-radius: 100%; 
+    border-radius: 100%;
     position: fixed;
     bottom: 20px;
     right: 10px;
-  } 
+}
 
-  .search-bar{ 
-      width: 190px; 
-      margin-top: 2px; 
-      margin-left: 2px;
-  }
-  
+.search-bar {
+    width: 190px;
+    margin-top: 2px;
+    margin-left: 2px;
+}
