@@ -36,3 +36,22 @@ body {
   color: #bc0f0f;
   background-color: transparent;
 }
+
+
+.accordion-button:focus {
+    border-color: #bc0f0f;
+    box-shadow: 0 0 0 0.25rem rgba(188, 15, 15, 0.25);
+}
+
+.accordion-monster-header{
+    flex: 1; 
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between;
+    margin-right: 10px;
+}
+
+.btn-danger {
+    --bs-btn-bg: #bc0f0f;
+    --bs-btn-border-color: #bc0f0f;
+}

@@ -58,12 +58,19 @@ function createMonsterTemplate(monster){
     const monstersTemplate = `
     <h2 class="accordion-header" id="headingOne">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="##COLLAPSE_ID"  aria-controls="#COLLAPSE_ID">
-        <img src ="#MONSTERSIMG" alt ="#MONSTERSALT" class="monsters-img"> #MONSTERSNOME
+            <div class="accordion-monster-header">
+                <div>
+                    <img src ="#MONSTERSIMG" alt ="#MONSTERSALT" class="monsters-img">
+                    #MONSTERSNOME
+                </div>
+                <a class="see-more btn btn-danger">see more</a>
+            </div>
         </button>
+        
+        
     </h2>
     <div id="#COLLAPSE_ID" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
         <div class="accordion-body">
-        <button class="see-more">see more</button>
         </div>
     </div>
        `
