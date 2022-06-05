@@ -10,6 +10,7 @@ function fillMonstersArrayNames(){
             for(const monster of result.results){
                 monstersArrayNames.push(monster.index)
             }
+            init();
         })
         .catch(error => console.log(error))
 }
@@ -39,8 +40,6 @@ function fillSmallArray(startingCreatureName, arrayLength){
 function displayMonsterInfo(monster){
     fillSmallArray(monster.index, 7)
     fillPages()
-    // document.title = monster.name  //Cambio il titolo della pagina con il nome del mostro 
-    const monsterArray = Object.keys(monster); 
 
 }
 
@@ -217,7 +216,7 @@ function openNav() {
     document.getElementById("mySidepanel").style.width = "0";
   }
 
-init();
+
 
 
 
