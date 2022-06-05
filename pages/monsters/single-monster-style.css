@@ -116,3 +116,5 @@ margin-top: 20px;
     width: 100%;
     height: fit-content;
 }
+
+.carousel .carousel-control { visibility: hidden; }
