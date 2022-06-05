@@ -1,6 +1,20 @@
 const BASE_URL = "https://www.dnd5eapi.co/api/monsters/"; //Link a cui aggiungeremo l'index del mostro da cercare
 
+const monstersArrayNames = []
+let loadedPages = []
+let pos = 0
 
+function fillMonstersArrayNames(){
+    fetch(BASE_URL).then(response => response.json())
+        .then(result => {
+            for(const monster of result.results){
+                monstersArrayNames.push(monster.index)
+            }
+        })
+        .catch(error => console.log(error))
+}
+
+fillMonstersArrayNames()
 function goHome() {
   window.location.href = '../../index.html';
 } 
@@ -9,57 +23,25 @@ function goMonsters() {
   window.location.href = './';
 }
 
-function displayMonsterInfo(monster) {
-    console.log('monster:', monster);
-    document.title = monster.name  //Cambio il titolo della pagina con il nome del mostro 
+function fillSmallArray(startingCreatureName, arrayLength){
+    const indexInBig = monstersArrayNames.indexOf(startingCreatureName)
+    const startingDifference = Math.floor(arrayLength / 2)
+    let startingIndex = wrapAround(indexInBig-startingDifference, monstersArrayNames)
+    for(let i = 0; i < arrayLength; i ++){
+        loadedPages.push(monstersArrayNames[startingIndex])
+        startingIndex = wrapAround(++startingIndex, monstersArrayNames)
+    }
+    for(let i = 0; i < startingDifference; i++){
+        loadedPages.push(loadedPages.shift())
+    }
+}
+
+function displayMonsterInfo(monster){
+    fillSmallArray(monster.index, 7)
+    fillPages()
+    // document.title = monster.name  //Cambio il titolo della pagina con il nome del mostro 
     const monsterArray = Object.keys(monster); 
 
-    const headerDiv = document.getElementById('header-div'); 
-    const headerImg = document.createElement('img'); 
-    headerImg.classList.add('img-header'); 
-    headerImg.src = './assets/d&d.png'; 
-    headerDiv.appendChild(headerImg); 
-
-    const breadCrumbsContainer = document.createElement('div'); 
-    breadCrumbsContainer.className = 'breadcrumbs'; 
-
-    const breadCrumbsTemplate = ` 
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <button class="breadcrumb-item breadcrumb-button" onclick="goHome()">Home</button>
-          <button class="breadcrumb-item breadcrumb-button" onclick="goMonsters()">Monsters</button>
-          <button class="breadcrumb-item active breadcrumb-button" aria-current="page">#MONSTERNAME</button>
-          </ol>
-      </nav>
-      `
-    const newBreadCrumbsTemplate = breadCrumbsTemplate.replaceAll('#MONSTERNAME', monster.name); 
-
-    breadCrumbsContainer.innerHTML += newBreadCrumbsTemplate; 
-    headerDiv.appendChild(breadCrumbsContainer);
-    
-    const titleDiv = document.getElementById('creature-title'); 
-    titleDiv.innerHTML = monster.name; 
-    
-    const imgDiv = document.getElementById('creature-img'); 
-    const img = document.createElement('img'); 
-    img.classList.add('img-creature');
-    const imgSrc = './pictures/' + monster.index + '.jpg'; 
-    img.src = imgSrc; 
-    imgDiv.appendChild(img); 
-
-    const infoDiv = document.getElementById('creature-info'); 
-    infoDiv.innerHTML = monster.size + ' ' + monster.type + ', ' +  monster.alignment; 
-
-    const statsDiv = document.getElementById('creature-stats')
-    statsDiv.innerHTML = fillCreatureStats(monster)
-
-    const gridDiv = document.getElementById('creature-grid'); 
-
-    fillCreatureText(monster.special_abilities, 'Special-abilities')
-    fillCreatureText(monster.actions, 'Actions')
-    fillCreatureText(monster.legendary_actions, 'Legendary-actions')
-    const infosToPutInGrid = ['armor_class', 'hit_points', 'speed', 'proficiencies', 'damage_immunities', 'senses', 'challenge_rating', 'xp', 'hit_points', 'languages']
-    fillGrid(monster, infosToPutInGrid)
 }
 
 function parseUrlParams() {   //prendo i parametri passati tramite URL dalla pagina precedente come avevamo fatto per l'app Todo del prof
@@ -97,12 +79,12 @@ function fillCreatureStats(monster){
     .replace('#INT', monster.intelligence).replace('#CON', monster.constitution)
     .replace('#WIS', monster.wisdom).replace('#CHA', monster.charisma)
 }
-function fillGrid(monster, gridInfos){
-    const gridDiv = document.getElementById('creature-grid')
+
+function fillGrid(monster, gridInfos, div){
     const table = document.createElement('table')
     table.className = 'table table-bordered table-hover bg-white'
     table.innerHTML = fillTable(monster,gridInfos)
-    gridDiv.appendChild(table)
+    div.appendChild(table)
 }
 
 function fillTable(monster, gridInfos){  // Prendo in ingresso un array di informazioni da mettere nel table
@@ -170,7 +152,7 @@ function generateProficienciesText(proficiencies, template){  //genera i saving 
     return returnString
 }
 
-function fillCreatureText(infosArray,infoName){ 
+function fillCreatureText(infosArray,infoName, div){ 
     // infoName viene usato per: prendere il div dell'abilità, scrivere il titolo e viene passato a createAccordionElement()
     // per creare ID unici per gli accordion
     if(infosArray.length === 0) return //Faccio subito un check. Se l'array è vuoto, non riempo nemmeno il div e faccio un return vuoto
@@ -180,8 +162,8 @@ function fillCreatureText(infosArray,infoName){
     const title = document.createElement('h3')
     title.innerText = infoName.replace('-', ' ')
     title.classList.add("info-name")
-    textContainer.appendChild(title)
-    return textContainer.appendChild(createAccordionElement(infosArray, infoName))
+    div.appendChild(title)
+    return div.appendChild(createAccordionElement(infosArray, infoName))
 }
 
 function init(){
@@ -236,3 +218,127 @@ function openNav() {
   }
 
 init();
+
+
+
+
+
+
+
+function fillMonsterPage(monster, pageID){
+    console.log(monster);
+    const monsterPage = document.getElementById(pageID)
+    monsterPage.innerHTML = ''
+    const monsterArray = Object.keys(monster); 
+
+    const breadCrumbsTemplate = ` 
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+            <button class="breadcrumb-item breadcrumb-button" onclick="goHome()">Home</button>
+            <button class="breadcrumb-item breadcrumb-button" onclick="goMonsters()">Monsters</button>
+            <button class="breadcrumb-item active breadcrumb-button" aria-current="page">#MONSTERNAME</button>
+            </ol>
+            </nav>`
+    const breadDiv = document.createElement('div');
+    const breadCrumbsContainer = document.createElement('div'); 
+    breadCrumbsContainer.className = 'breadcrumbs'; 
+    const newBreadCrumbsTemplate = breadCrumbsTemplate.replaceAll('#MONSTERNAME', monster.name); 
+    breadCrumbsContainer.innerHTML += newBreadCrumbsTemplate; 
+    breadDiv.appendChild(breadCrumbsContainer);
+
+    const titleDiv = document.createElement('div'); 
+    titleDiv.className = 'creature-title'
+    titleDiv.innerHTML = monster.name; 
+    
+    const imgDiv = document.createElement('div'); 
+    const img = document.createElement('img'); 
+    img.classList.add('img-creature');
+    const imgSrc = './pictures/' + monster.index + '.jpg'; 
+    img.src = imgSrc; 
+    imgDiv.appendChild(img); 
+
+    const infoDiv = document.createElement('div'); 
+    infoDiv.className = 'creature-info'
+    infoDiv.innerHTML = monster.size + ' ' + monster.type + ', ' +  monster.alignment; 
+
+    const statsDiv = document.createElement('div')
+    statsDiv.innerHTML = fillCreatureStats(monster)
+
+    const gridDiv = document.createElement('div')
+    const infosToPutInGrid = ['armor_class', 'hit_points', 'speed', 'proficiencies', 'damage_immunities', 'senses', 'challenge_rating', 'xp', 'hit_points', 'languages']
+    fillGrid(monster, infosToPutInGrid, gridDiv)
+    
+    const creatureText = document.createElement('div')
+    const specialAbilitiesDiv = document.createElement('div')
+    const specialActionsDiv = document.createElement('div')
+    const specialLegendaryActionsDiv = document.createElement('div')
+    fillCreatureText(monster.special_abilities, 'Special-abilities',specialAbilitiesDiv)
+    fillCreatureText(monster.actions, 'Actions',specialActionsDiv)
+    fillCreatureText(monster.legendary_actions, 'Legendary-actions',specialLegendaryActionsDiv)
+    creatureText.append(specialAbilitiesDiv,specialActionsDiv,specialLegendaryActionsDiv)
+
+    monsterPage.append(breadDiv, titleDiv, imgDiv, infoDiv, statsDiv, gridDiv, creatureText)
+}
+
+function wrapAround(index, array){
+    return (index + array.length) % array.length
+}
+
+function fillPages(){
+    for(let i = 0; i < loadedPages.length; i++){
+        const id = 'monster' + (1 + i)
+        const page = document.getElementById(id)
+        page.innerHTML = loadedPages[i]
+        fetch(BASE_URL + loadedPages[i])
+            .then(response => response.json())
+            .then(result => fillMonsterPage(result, id))
+    }
+}
+
+function previous(){
+    pos = wrapAround(--pos, loadedPages)
+    cycleSmallArray(pos)
+}
+
+function next(){
+    pos = wrapAround(++pos, loadedPages)
+    cycleSmallArray(pos)
+}
+
+function cycleSmallArray(posInSmallArray){
+    const arrayLength = loadedPages.length
+    const indexInBig = monstersArrayNames.indexOf(loadedPages[posInSmallArray])
+    const startingDifference = Math.floor(arrayLength / 2)
+    let startingIndex = wrapAround(indexInBig-startingDifference, monstersArrayNames)
+    loadedPages = []
+    for(let i = 0; i < arrayLength; i ++){
+        loadedPages.push(monstersArrayNames[startingIndex])
+        startingIndex = wrapAround(++startingIndex, monstersArrayNames)
+    }
+    for(let i = 0; i < startingDifference; i++){
+        loadedPages.push(loadedPages.shift())
+    }
+    for(let i = 0; i < posInSmallArray; i++){
+        loadedPages.unshift(loadedPages.pop())
+    }
+    changeEnds(pos)
+}
+
+function changeEnds(currentPos){
+    const leftPageIndex = wrapAround(currentPos-3, loadedPages)
+    const rightPageIndex = wrapAround(currentPos+3, loadedPages)
+    const leftPage = 'monster'+ (leftPageIndex + 1)
+    const rightPage = 'monster' + (rightPageIndex + 1)
+
+    fetch(BASE_URL + loadedPages[leftPageIndex])
+        .then(response => response.json())
+        .then(result => fillMonsterPage(result, leftPage))
+
+    fetch(BASE_URL + loadedPages[rightPageIndex])
+        .then(response => response.json())
+        .then(result => fillMonsterPage(result, rightPage))    
+
+    leftPage.innerHTML = loadedPages[leftPageIndex]
+    rightPage.innerHTML = loadedPages[rightPageIndex]
+
+}
