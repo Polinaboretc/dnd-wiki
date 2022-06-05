@@ -3,11 +3,8 @@
     height: 30px;
 }
 
-#page-container {
-    margin-top: 110px;
-}
 
-#creature-info {
+.creature-info {
     font-style: italic;
 }
 
@@ -27,7 +24,7 @@
     margin: 8px auto;
 }
 
-#creature-title {
+.creature-title{
     font-size: xx-large;
 }
 
@@ -36,34 +33,6 @@
     background-repeat: no-repeat;
     border: none;
 }
-
-
-/* #creature-stats{
-    margin: 8px 0px;
-}
-#creature-stats th{
-    border: 1px solid #303030;
-}
-#creature-stats table {
-    border-collapse: collapse;
-}
-
-#creature-stats table thead{
-    background-color: rgba(153, 153, 153, 0.356);
-    text-align: left;
-    
-}
-
-#creature-stats table thead th{
-    padding: 0px 4px;
-}
-
-#creature-stats table tbody th{
-    font-weight: normal;
-    text-align: center;
-}
-
-*/
 
 .info-name {
     font-size: 15px;
@@ -134,4 +103,16 @@
 
 .breadcrumbs{
 margin-top: 20px;
+}
+
+.container{
+    padding-top: 70px;
+    height: 100%;
+    width: 100%;
+}
+
+
+.page{
+    width: 100%;
+    height: fit-content;
 }
