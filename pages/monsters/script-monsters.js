@@ -74,7 +74,11 @@ function createMonsterTemplate(monster){
         </div>
     </div>
        `
-    const monsterImg = './pictures/' + monster.index + '.jpg'
+    let monsterImg = './pictures/' + monster.index + '.jpg'
+    if(monster.index === 'acolyte' || monster.index === 'giant-poisonous-snake' || monster.index === 'werebear-human' || monster.index === 'werebear-hybrid' ||  monster.index === 'wererat-human' ||  monster.index === 'werebear-hybrid' ||  monster.index === 'weretiger-human'  ||  monster.index === 'wereboar-hybrid' 
+                         || monster.index === 'wereboar-human' || monster.index === 'wererat-hybrid' || monster.index === 'weretiger-hybrid' || monster.index === 'werewolf-hybrid'){
+        monsterImg = './pictures/default.jpeg'
+    }
     return monstersTemplate.replace('#MONSTERSIMG', monsterImg)
     .replace('#MONSTERSALT', monster.index)
     .replace('#COLLAPSE_ID', 'collpase'+monster.index)

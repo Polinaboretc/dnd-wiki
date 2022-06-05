@@ -252,7 +252,11 @@ function fillMonsterPage(monster, pageID){
     const imgDiv = document.createElement('div'); 
     const img = document.createElement('img'); 
     img.classList.add('img-creature');
-    const imgSrc = './pictures/' + monster.index + '.jpg'; 
+    let imgSrc = './pictures/' + monster.index + '.jpg'; 
+    if(monster.index === 'acolyte' || monster.index === 'giant-poisonous-snake' || monster.index === 'werebear-human' || monster.index === 'werebear-hybrid' ||  monster.index === 'wererat-human' ||  monster.index === 'werebear-hybrid' ||  monster.index === 'weretiger-human'  ||  monster.index === 'wereboar-hybrid' 
+      || monster.index === 'wereboar-human' || monster.index === 'wererat-hybrid' || monster.index === 'weretiger-hybrid' || monster.index === 'werewolf-hybrid'){
+        imgSrc = './pictures/default.jpeg'
+    }
     img.src = imgSrc; 
     imgDiv.appendChild(img); 
 
