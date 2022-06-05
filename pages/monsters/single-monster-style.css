@@ -24,7 +24,7 @@
     max-width: 500px;
     display: block;
     height: auto;
-    margin: 0px auto;
+    margin: 8px auto;
 }
 
 #creature-title {
@@ -130,4 +130,8 @@
     width: 190px;
     margin-top: 2px;
     margin-left: 2px;
+}
+
+.breadcrumbs{
+margin-top: 20px;
 }

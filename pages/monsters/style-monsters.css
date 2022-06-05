@@ -48,10 +48,13 @@ body {
     display: flex; 
     flex-direction: row; 
     justify-content: space-between;
-    margin-right: 10px;
 }
 
 .btn-danger {
     --bs-btn-bg: #bc0f0f;
     --bs-btn-border-color: #bc0f0f;
+}
+
+.accordion-button::after {
+    content: unset;
 }
