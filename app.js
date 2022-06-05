@@ -12,9 +12,13 @@ function displayData(result) {  //  funione per mostrare array da object (result
     const keysArray = Object.keys(result);  //  array con chiavi e valori 
     console.log('keyvalues', keysArray);
 
-    const template = ` <a href="#LINK" target="_blank">#NOME</a><br> ` 
+    const template = `<a href="#LINK" class="list-group-item category-item"> #NOME </a>` 
 
-    const container = document.body; 
+    const container = document.getElementById("app"); 
+
+    const listDiv = document.createElement("div")
+    listDiv.classList.add("list-group")
+    container.appendChild(listDiv)
 
     for (const key of keysArray) {
         console.log('chiave:', key, 'valore:', result[key]); // result[key] richimo volore di key, perrche tutte si chiamano key 
@@ -22,7 +26,7 @@ function displayData(result) {  //  funione per mostrare array da object (result
         const newTemplate = template.replace("#LINK", newLink) 
                                     .replace("#NOME", key.toUpperCase()); 
 
-        container.innerHTML += newTemplate  //  prende precedente container, e ci scrive sopra newtemplate
+        listDiv.innerHTML += newTemplate  //  prende precedente container, e ci scrive sopra newtemplate
     } 
 } 
 
