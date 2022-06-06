@@ -13,7 +13,8 @@ function initMonsters() {
       monstersData = result.results;
       return displayMonsters(result.results);
     });
-}
+} 
+
 
 function displayMonsters(monsters) {
     const monstersContainer = document.getElementById("monsters-container");
@@ -28,6 +29,31 @@ function displayMonsters(monsters) {
         seeMoreButton.onclick = () => goToMonsterPage(monster.index); // Aggiungo al bottone la funzione goToMonsterPage()
         monstersContainer.appendChild(flipCardDiv); // Aggiungo il div del mostro singolo al div che contiene tutti i mostri
     }
+function displayMonsters(monsters) { 
+
+  // Invece di scrivere tutto direttamente nel body, ho creato un contenitore apposito per i mostri
+  // Ciò renderà futura gestione estetica molto più semplice
+  const monstersContainer = document.getElementById("monsters-container");
+  // puliamo il contenitore
+  monstersContainer.innerHTML = "";
+  for (const monster of monsters) {
+    const div = document.createElement("div"); // Creo il div che conterrà il singolo mostro
+    div.className = "accordion-item single-monster-container";
+    div.innerHTML = createMonsterTemplate(monster); // Riempo il div con il template
+    const seeMoreButton = div.querySelector(".see-more");
+    seeMoreButton.onclick = () => goToMonsterPage(monster.index); // Aggiungo al bottone la funzione goToMonsterPage()
+    monstersContainer.appendChild(div); // Aggiungo il div del mostro singolo al div che contiene tutti i mostri
+  }
+} 
+
+/* Set the width of the sidebar to 250px (show it) */
+function openNav() {
+  document.getElementById("mySidepanel").style.width = "290px";
+}
+
+/* Set the width of the sidebar to 0 (hide it) */
+function closeNav() {
+  document.getElementById("mySidepanel").style.width = "0";
 }
 
 function search() {

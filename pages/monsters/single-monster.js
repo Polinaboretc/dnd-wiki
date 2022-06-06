@@ -35,8 +35,48 @@ function fillSmallArray(startingCreatureName, arrayLength) {  //arrayLenght 7
     }
     for (let i = 0; i < startingDifference; i++) {
         loadedPages.push(loadedPages.shift())
-    }
+    } 
 }
+
+// function autocomplete(inp, arr) { 
+//     console.log(monstersArrayNames); 
+
+//     let currentFocus; 
+
+//     inp.addEventListener("input", function(e) { 
+//         let a, b, i, val = this.value; 
+//         closeAllLists(); 
+        
+//         if (!val){ return false;} 
+        
+        
+//         currentFocus = -1; 
+//         a = document.createElement("div"); 
+//         a.setAttribute("id", this.id + "autocomplete-list"); 
+//         a.setAttribute("class", "autocomplete-items"); 
+//         this.parentNode.appendChild(a); 
+
+//         for (let i = 0; i < arr.length; i++) {
+//             if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+//                 b = document.createElement("div"); 
+//                 b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>"; 
+//                 b.innerHTML += arr[i].substr(val.length); 
+//                 b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>"; 
+//                 b.addEventListener("click", function(e) {
+//                     inp.value = this.getElementsByTagName("input")[0].value; 
+//                     closeAllLists();
+//                 }); 
+
+//                 a.appendChild(b);
+//             }
+            
+//         }
+
+        
+//     })
+// }
+
+// autocomplete();
 
 function displayMonsterInfo(monster) {
     fillSmallArray(monster.index, 7)
