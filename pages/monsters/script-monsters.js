@@ -29,6 +29,7 @@ function displayMonsters(monsters) {
         seeMoreButton.onclick = () => goToMonsterPage(monster.index); // Aggiungo al bottone la funzione goToMonsterPage()
         monstersContainer.appendChild(flipCardDiv); // Aggiungo il div del mostro singolo al div che contiene tutti i mostri
     }
+}
 function displayMonsters(monsters) { 
 
   // Invece di scrivere tutto direttamente nel body, ho creato un contenitore apposito per i mostri
