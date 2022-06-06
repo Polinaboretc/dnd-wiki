@@ -1,5 +1,9 @@
 const BASE_URL = "https://www.dnd5eapi.co/api/monsters";
 
+function goHome() {
+  window.location.href = '../../index.html';
+}
+
 let monstersData = [];
 
 function initMonsters() {
@@ -11,7 +15,8 @@ function initMonsters() {
     });
 }
 
-function displayMonsters(monsters) {
+function displayMonsters(monsters) { 
+
   // Invece di scrivere tutto direttamente nel body, ho creato un contenitore apposito per i mostri
   // Ciò renderà futura gestione estetica molto più semplice
   const monstersContainer = document.getElementById("monsters-container");

@@ -24,10 +24,6 @@ body {
     border-top: 1px solid #DDD ;
 }
 
-#monsters-container{
-    margin-top: 100px;
-}
-
 .navbar{
   border-bottom: 2px solid #bc0f0f;
 }
@@ -57,4 +53,11 @@ body {
 
 .accordion-button::after {
     content: unset;
+} 
+
+.breadcrumb-style{ 
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none; 
+    margin-top: 100px;
 }

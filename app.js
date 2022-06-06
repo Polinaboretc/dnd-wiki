@@ -5,6 +5,10 @@ function init() {
     .then(response => response.json()) //   standard
     .then(result => displayData(result))    //  reuslt è oggetto
     
+} 
+
+function goMonsters() {
+    window.location.href = './pages/monsters/index.html';
 }
 
 function displayData(result) {  //  funione per mostrare array da object (result) in console

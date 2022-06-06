@@ -15,7 +15,8 @@ function fillMonstersArrayNames() {
         .catch(error => console.log(error))
 }
 
-fillMonstersArrayNames()
+fillMonstersArrayNames(); 
+
 function goHome() {
     window.location.href = '../../index.html';
 }

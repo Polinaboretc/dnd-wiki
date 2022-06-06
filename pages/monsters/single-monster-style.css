@@ -117,3 +117,7 @@ margin-top: 20px;
     height: fit-content;
 }
 
+.carousel-controller-style{ 
+    top: 5%; 
+    height: 15%;
+}
