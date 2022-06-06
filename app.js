@@ -9,6 +9,16 @@ function init() {
 
 function goMonsters() {
     window.location.href = './pages/monsters/index.html';
+} 
+
+/* Set the width of the sidebar to 250px (show it) */
+function openNav() {
+    document.getElementById("mySidepanel").style.width = "290px";
+}
+
+/* Set the width of the sidebar to 0 (hide it) */
+function closeNav() {
+    document.getElementById("mySidepanel").style.width = "0";
 }
 
 function displayData(result) {  //  funione per mostrare array da object (result) in console

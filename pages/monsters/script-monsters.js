@@ -13,7 +13,8 @@ function initMonsters() {
       monstersData = result.results;
       return displayMonsters(result.results);
     });
-}
+} 
+
 
 function displayMonsters(monsters) { 
 
@@ -30,6 +31,16 @@ function displayMonsters(monsters) {
     seeMoreButton.onclick = () => goToMonsterPage(monster.index); // Aggiungo al bottone la funzione goToMonsterPage()
     monstersContainer.appendChild(div); // Aggiungo il div del mostro singolo al div che contiene tutti i mostri
   }
+} 
+
+/* Set the width of the sidebar to 250px (show it) */
+function openNav() {
+  document.getElementById("mySidepanel").style.width = "290px";
+}
+
+/* Set the width of the sidebar to 0 (hide it) */
+function closeNav() {
+  document.getElementById("mySidepanel").style.width = "0";
 }
 
 function search() {

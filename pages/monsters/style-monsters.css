@@ -60,4 +60,56 @@ body {
     background-repeat: no-repeat;
     border: none; 
     margin-top: 100px;
+} 
+
+.sidepanel {
+    height: 45px;
+    /* Specify a height */
+    width: 0;
+    /* 0 width - change this with JavaScript */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Stay on top */
+    bottom: 23px;
+    right: 25px;
+    background-color: rgba(17, 17, 17, 0);
+    /* Black*/
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
+    overflow-y: hidden;
+    /* Disable horizontal scroll */
+    transition: 0.5s;
+    /* 0.5 second transition effect to slide in the sidepanel */
+    border-radius: 10px 50px 50px 10px;
+}
+
+/* Position and style the close button (top right corner) */
+.sidepanel .closebtn {
+    position: absolute;
+    font-size: 36px;
+    margin-left: 50px;
+    bottom: -10px;
+    right: 0px;
+    color: rgba(213, 213, 213, 0);
+}
+
+/* Style the button that is used to open the sidepanel */
+.openbtn {
+    width: 55px;
+    height: 55px;
+    cursor: pointer;
+    padding: 10px 15px;
+    border: none;
+    background-color: rgb(213, 213, 213);
+    border-radius: 100%;
+    position: fixed;
+    bottom: 20px;
+    right: 10px;
+}
+
+.search-bar {
+    width: 190px;
+    margin-top: 2px;
+    margin-left: 2px;
 }
