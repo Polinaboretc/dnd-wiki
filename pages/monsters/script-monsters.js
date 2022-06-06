@@ -63,7 +63,7 @@ function createMonsterTemplate(monster){
                     <img src ="#MONSTERSIMG" alt ="#MONSTERSALT" class="monsters-img">
                     #MONSTERSNOME
                 </div>
-                <a class="see-more btn btn-danger">see more</a>
+                <a class="see-more btn btn-danger">+</a>
             </div>
         </button>
         
