@@ -24,7 +24,7 @@ function goMonsters() {
     window.location.href = './';
 }
 
-function fillSmallArray(startingCreatureName, arrayLength) {
+function fillSmallArray(startingCreatureName, arrayLength) {  //arrayLenght 7
     const indexInBig = monstersArrayNames.indexOf(startingCreatureName)
     const startingDifference = Math.floor(arrayLength / 2)
     let startingIndex = wrapAround(indexInBig - startingDifference, monstersArrayNames)
