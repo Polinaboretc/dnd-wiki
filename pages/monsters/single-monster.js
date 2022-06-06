@@ -4,10 +4,10 @@ const monstersArrayNames = []
 let loadedPages = []
 let pos = 0
 
-function fillMonstersArrayNames(){
+function fillMonstersArrayNames() {
     fetch(BASE_URL).then(response => response.json())
         .then(result => {
-            for(const monster of result.results){
+            for (const monster of result.results) {
                 monstersArrayNames.push(monster.index)
             }
             init();
@@ -17,39 +17,39 @@ function fillMonstersArrayNames(){
 
 fillMonstersArrayNames()
 function goHome() {
-  window.location.href = '../../index.html';
-} 
-
-function goMonsters() {
-  window.location.href = './';
+    window.location.href = '../../index.html';
 }
 
-function fillSmallArray(startingCreatureName, arrayLength){
+function goMonsters() {
+    window.location.href = './';
+}
+
+function fillSmallArray(startingCreatureName, arrayLength) {
     const indexInBig = monstersArrayNames.indexOf(startingCreatureName)
     const startingDifference = Math.floor(arrayLength / 2)
-    let startingIndex = wrapAround(indexInBig-startingDifference, monstersArrayNames)
-    for(let i = 0; i < arrayLength; i ++){
+    let startingIndex = wrapAround(indexInBig - startingDifference, monstersArrayNames)
+    for (let i = 0; i < arrayLength; i++) {
         loadedPages.push(monstersArrayNames[startingIndex])
         startingIndex = wrapAround(++startingIndex, monstersArrayNames)
     }
-    for(let i = 0; i < startingDifference; i++){
+    for (let i = 0; i < startingDifference; i++) {
         loadedPages.push(loadedPages.shift())
     }
 }
 
-function displayMonsterInfo(monster){
+function displayMonsterInfo(monster) {
     fillSmallArray(monster.index, 7)
     fillPages()
 
 }
 
 function parseUrlParams() {   //prendo i parametri passati tramite URL dalla pagina precedente come avevamo fatto per l'app Todo del prof
-    const urlSearchParams = new URLSearchParams(window.location.search); 
-    const params = Object.fromEntries(urlSearchParams.entries()); 
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
     return params;
 }
 
-function fillCreatureStats(monster){
+function fillCreatureStats(monster) {
     const template = `
     <table class="table table-bordered bg-white text-center">
         <thead>
@@ -74,74 +74,74 @@ function fillCreatureStats(monster){
         </tbody>
 </table>`
     return template
-    .replace('#DEX', monster.dexterity).replace('#STR', monster.strength)
-    .replace('#INT', monster.intelligence).replace('#CON', monster.constitution)
-    .replace('#WIS', monster.wisdom).replace('#CHA', monster.charisma)
+        .replace('#DEX', monster.dexterity).replace('#STR', monster.strength)
+        .replace('#INT', monster.intelligence).replace('#CON', monster.constitution)
+        .replace('#WIS', monster.wisdom).replace('#CHA', monster.charisma)
 }
 
-function fillGrid(monster, gridInfos, div){
+function fillGrid(monster, gridInfos, div) {
     const table = document.createElement('table')
     table.className = 'table table-bordered table-hover bg-white'
-    table.innerHTML = fillTable(monster,gridInfos)
+    table.innerHTML = fillTable(monster, gridInfos)
     div.appendChild(table)
 }
 
-function fillTable(monster, gridInfos){  // Prendo in ingresso un array di informazioni da mettere nel table
+function fillTable(monster, gridInfos) {  // Prendo in ingresso un array di informazioni da mettere nel table
     const tableTemplate = `
         <tr class="info-tr">
             <th class="info-name-tr">#INFONAME</th>
             <td class="info-content-tr">#INFOCONTENT</td>
         </tr>`
     let fullTable = ''  // Variable che riempirà il table genitore
-    for(const info of gridInfos){
+    for (const info of gridInfos) {
         const infoName = (info.charAt(0).toUpperCase() + info.slice(1)).replace('_', ' ');
         let infoContent
-        if(info === 'proficiencies'){  // Dato che le proficiencies sono oggetti complicati, ho creato una funzione per gestirle
+        if (info === 'proficiencies') {  // Dato che le proficiencies sono oggetti complicati, ho creato una funzione per gestirle
             fullTable += generateProficienciesText(monster.proficiencies, tableTemplate)
-            continue 
+            continue
         }
-        else if(typeof(monster[info]) === 'object'){  //Per oggetti come la speed, faccio qualche passaggio in più
-            if(monster[info].length === 0 ) infoContent = 'none';
+        else if (typeof (monster[info]) === 'object') {  //Per oggetti come la speed, faccio qualche passaggio in più
+            if (monster[info].length === 0) infoContent = 'none';
             else {
                 infoContent = JSON.stringify(monster[info]).replaceAll(/"|{|}|\[|\]|ft.|,/g, '').replaceAll('_', ' ')
             }
         }
         else {
-            
+
             infoContent = monster[info]
         }
-        const modifiedTemplate = tableTemplate 
+        const modifiedTemplate = tableTemplate
             .replace('#INFONAME', infoName)
             .replace('#INFOCONTENT', infoContent)
-            fullTable += modifiedTemplate
+        fullTable += modifiedTemplate
     }
     return fullTable
 }
 
-function generateProficienciesText(proficiencies, template){  //genera i saving throw e skill
+function generateProficienciesText(proficiencies, template) {  //genera i saving throw e skill
     let returnString = ''
     const savingThrowsArray = []
     const skillsArray = []
-    for(const proficiency of proficiencies){  // Controllo quanti saving throws ho
-        if(proficiency.proficiency.index.includes('throw')) 
+    for (const proficiency of proficiencies) {  // Controllo quanti saving throws ho
+        if (proficiency.proficiency.index.includes('throw'))
             savingThrowsArray.push([proficiency.proficiency.name, proficiency.value])
-        if(proficiency.proficiency.index.includes('skill'))  // Controllo quante skills ho
-        skillsArray.push([proficiency.proficiency.name, proficiency.value])
+        if (proficiency.proficiency.index.includes('skill'))  // Controllo quante skills ho
+            skillsArray.push([proficiency.proficiency.name, proficiency.value])
     }
-    if(savingThrowsArray.length !== 0){
+    if (savingThrowsArray.length !== 0) {
         const infoName = 'Saving throws'
         let infoContent = ''
-        for(const savingThrow of savingThrowsArray){
+        for (const savingThrow of savingThrowsArray) {
             infoContent += savingThrow[0].replace('Saving Throw:', '') + ' +' + savingThrow[1]
         }
         returnString += template
             .replace('#INFONAME', infoName)
             .replace('#INFOCONTENT', infoContent)
     }
-    if(skillsArray.length !== 0){
+    if (skillsArray.length !== 0) {
         const infoName = 'Skills'
         let infoContent = ''
-        for(const skill of skillsArray){
+        for (const skill of skillsArray) {
             infoContent += skill[0].replace('Skill:', '') + ' +' + skill[1]
         }
         returnString += template
@@ -151,10 +151,10 @@ function generateProficienciesText(proficiencies, template){  //genera i saving 
     return returnString
 }
 
-function fillCreatureText(infosArray,infoName, div){ 
+function fillCreatureText(infosArray, infoName, div) {
     // infoName viene usato per: prendere il div dell'abilità, scrivere il titolo e viene passato a createAccordionElement()
     // per creare ID unici per gli accordion
-    if(infosArray.length === 0) return //Faccio subito un check. Se l'array è vuoto, non riempo nemmeno il div e faccio un return vuoto
+    if (infosArray.length === 0) return //Faccio subito un check. Se l'array è vuoto, non riempo nemmeno il div e faccio un return vuoto
     // Da valutare se non scrivere niente o magari metter un none, tipo: Actions: none
     // Al momento se non ha actions, non crea nemmeno il titolo di actions.
     const textContainer = document.getElementById(infoName.toLowerCase())
@@ -165,20 +165,20 @@ function fillCreatureText(infosArray,infoName, div){
     return div.appendChild(createAccordionElement(infosArray, infoName))
 }
 
-function init(){
+function init() {
     const htmlParams = parseUrlParams();
-    const monsterUrl = BASE_URL + htmlParams.name; 
+    const monsterUrl = BASE_URL + htmlParams.name;
     fetch(monsterUrl)
         .then(response => response.json())
         .then(result => displayMonsterInfo(result))
         .catch(error => console.log(error));
 }
 
-function createAccordionElement(infosArray, infoName){ 
+function createAccordionElement(infosArray, infoName) {
     const divAccordionContainer = document.createElement('div')
     divAccordionContainer.className = 'accordion';
-    const accordionId = 'accordion' + infoName; 
-    divAccordionContainer.id = accordionId; 
+    const accordionId = 'accordion' + infoName;
+    divAccordionContainer.id = accordionId;
 
     const accordionTemplate = ` 
     <div class="accordion-item">
@@ -198,37 +198,29 @@ function createAccordionElement(infosArray, infoName){
         const info = infosArray[i];
         const myId = infoName + i;
         const newTemplate = accordionTemplate
-            .replaceAll('#NUMBER', myId) 
+            .replaceAll('#NUMBER', myId)
             .replace('#NAME', info.name)
             .replace('#DESCRIPTION', info.desc);
         divAccordionContainer.innerHTML += newTemplate;
     }
     return divAccordionContainer;
-} 
+}
 
 /* Set the width of the sidebar to 250px (show it) */
 function openNav() {
     document.getElementById("mySidepanel").style.width = "290px";
-  }
-  
-  /* Set the width of the sidebar to 0 (hide it) */
-  function closeNav() {
+}
+
+/* Set the width of the sidebar to 0 (hide it) */
+function closeNav() {
     document.getElementById("mySidepanel").style.width = "0";
-  }
+}
 
-
-
-
-
-
-
-
-
-function fillMonsterPage(monster, pageID){
+function fillMonsterPage(monster, pageID) {
     console.log(monster);
     const monsterPage = document.getElementById(pageID)
     monsterPage.innerHTML = ''
-    const monsterArray = Object.keys(monster); 
+    const monsterArray = Object.keys(monster);
 
     const breadCrumbsTemplate = ` 
         <nav aria-label="breadcrumb">
@@ -239,30 +231,30 @@ function fillMonsterPage(monster, pageID){
             </ol>
             </nav>`
     const breadDiv = document.createElement('div');
-    const breadCrumbsContainer = document.createElement('div'); 
-    breadCrumbsContainer.className = 'breadcrumbs'; 
-    const newBreadCrumbsTemplate = breadCrumbsTemplate.replaceAll('#MONSTERNAME', monster.name); 
-    breadCrumbsContainer.innerHTML += newBreadCrumbsTemplate; 
+    const breadCrumbsContainer = document.createElement('div');
+    breadCrumbsContainer.className = 'breadcrumbs';
+    const newBreadCrumbsTemplate = breadCrumbsTemplate.replaceAll('#MONSTERNAME', monster.name);
+    breadCrumbsContainer.innerHTML += newBreadCrumbsTemplate;
     breadDiv.appendChild(breadCrumbsContainer);
 
-    const titleDiv = document.createElement('div'); 
+    const titleDiv = document.createElement('div');
     titleDiv.className = 'creature-title'
-    titleDiv.innerHTML = monster.name; 
-    
-    const imgDiv = document.createElement('div'); 
-    const img = document.createElement('img'); 
+    titleDiv.innerHTML = monster.name;
+
+    const imgDiv = document.createElement('div');
+    const img = document.createElement('img');
     img.classList.add('img-creature');
-    let imgSrc = './pictures/' + monster.index + '.jpg'; 
-    if(monster.index === 'acolyte' || monster.index === 'giant-poisonous-snake' || monster.index === 'werebear-human' || monster.index === 'werebear-hybrid' ||  monster.index === 'wererat-human' ||  monster.index === 'werebear-hybrid' ||  monster.index === 'weretiger-human'  ||  monster.index === 'wereboar-hybrid' 
-      || monster.index === 'wereboar-human' || monster.index === 'wererat-hybrid' || monster.index === 'weretiger-hybrid' || monster.index === 'werewolf-hybrid'){
+    let imgSrc = './pictures/' + monster.index + '.jpg';
+    if (monster.index === 'acolyte' || monster.index === 'giant-poisonous-snake' || monster.index === 'werebear-human' || monster.index === 'werebear-hybrid' || monster.index === 'wererat-human' || monster.index === 'werebear-hybrid' || monster.index === 'weretiger-human' || monster.index === 'wereboar-hybrid'
+        || monster.index === 'wereboar-human' || monster.index === 'wererat-hybrid' || monster.index === 'weretiger-hybrid' || monster.index === 'werewolf-hybrid') {
         imgSrc = './pictures/default.jpeg'
     }
-    img.src = imgSrc; 
-    imgDiv.appendChild(img); 
+    img.src = imgSrc;
+    imgDiv.appendChild(img);
 
-    const infoDiv = document.createElement('div'); 
+    const infoDiv = document.createElement('div');
     infoDiv.className = 'creature-info'
-    infoDiv.innerHTML = monster.size + ' ' + monster.type + ', ' +  monster.alignment; 
+    infoDiv.innerHTML = monster.size + ' ' + monster.type + ', ' + monster.alignment;
 
     const statsDiv = document.createElement('div')
     statsDiv.innerHTML = fillCreatureStats(monster)
@@ -270,25 +262,25 @@ function fillMonsterPage(monster, pageID){
     const gridDiv = document.createElement('div')
     const infosToPutInGrid = ['armor_class', 'hit_points', 'speed', 'proficiencies', 'damage_immunities', 'senses', 'challenge_rating', 'xp', 'hit_points', 'languages']
     fillGrid(monster, infosToPutInGrid, gridDiv)
-    
+
     const creatureText = document.createElement('div')
     const specialAbilitiesDiv = document.createElement('div')
     const specialActionsDiv = document.createElement('div')
     const specialLegendaryActionsDiv = document.createElement('div')
-    fillCreatureText(monster.special_abilities, 'Special-abilities',specialAbilitiesDiv)
-    fillCreatureText(monster.actions, 'Actions',specialActionsDiv)
-    fillCreatureText(monster.legendary_actions, 'Legendary-actions',specialLegendaryActionsDiv)
-    creatureText.append(specialAbilitiesDiv,specialActionsDiv,specialLegendaryActionsDiv)
+    fillCreatureText(monster.special_abilities, 'Special-abilities', specialAbilitiesDiv)
+    fillCreatureText(monster.actions, 'Actions', specialActionsDiv)
+    fillCreatureText(monster.legendary_actions, 'Legendary-actions', specialLegendaryActionsDiv)
+    creatureText.append(specialAbilitiesDiv, specialActionsDiv, specialLegendaryActionsDiv)
 
     monsterPage.append(breadDiv, titleDiv, imgDiv, infoDiv, statsDiv, gridDiv, creatureText)
 }
 
-function wrapAround(index, array){
+function wrapAround(index, array) {
     return (index + array.length) % array.length
 }
 
-function fillPages(){
-    for(let i = 0; i < loadedPages.length; i++){
+function fillPages() {
+    for (let i = 0; i < loadedPages.length; i++) {
         const id = 'monster' + (1 + i)
         const page = document.getElementById(id)
         page.innerHTML = loadedPages[i]
@@ -298,39 +290,39 @@ function fillPages(){
     }
 }
 
-function previous(){
+function previous() {
     pos = wrapAround(--pos, loadedPages)
     cycleSmallArray(pos)
 }
 
-function next(){
+function next() {
     pos = wrapAround(++pos, loadedPages)
     cycleSmallArray(pos)
 }
 
-function cycleSmallArray(posInSmallArray){
+function cycleSmallArray(posInSmallArray) {
     const arrayLength = loadedPages.length
     const indexInBig = monstersArrayNames.indexOf(loadedPages[posInSmallArray])
     const startingDifference = Math.floor(arrayLength / 2)
-    let startingIndex = wrapAround(indexInBig-startingDifference, monstersArrayNames)
+    let startingIndex = wrapAround(indexInBig - startingDifference, monstersArrayNames)
     loadedPages = []
-    for(let i = 0; i < arrayLength; i ++){
+    for (let i = 0; i < arrayLength; i++) {
         loadedPages.push(monstersArrayNames[startingIndex])
         startingIndex = wrapAround(++startingIndex, monstersArrayNames)
     }
-    for(let i = 0; i < startingDifference; i++){
+    for (let i = 0; i < startingDifference; i++) {
         loadedPages.push(loadedPages.shift())
     }
-    for(let i = 0; i < posInSmallArray; i++){
+    for (let i = 0; i < posInSmallArray; i++) {
         loadedPages.unshift(loadedPages.pop())
     }
     changeEnds(pos)
 }
 
-function changeEnds(currentPos){
-    const leftPageIndex = wrapAround(currentPos-3, loadedPages)
-    const rightPageIndex = wrapAround(currentPos+3, loadedPages)
-    const leftPage = 'monster'+ (leftPageIndex + 1)
+function changeEnds(currentPos) {
+    const leftPageIndex = wrapAround(currentPos - 3, loadedPages)
+    const rightPageIndex = wrapAround(currentPos + 3, loadedPages)
+    const leftPage = 'monster' + (leftPageIndex + 1)
     const rightPage = 'monster' + (rightPageIndex + 1)
 
     fetch(BASE_URL + loadedPages[leftPageIndex])
@@ -339,7 +331,7 @@ function changeEnds(currentPos){
 
     fetch(BASE_URL + loadedPages[rightPageIndex])
         .then(response => response.json())
-        .then(result => fillMonsterPage(result, rightPage))    
+        .then(result => fillMonsterPage(result, rightPage))
 
     leftPage.innerHTML = loadedPages[leftPageIndex]
     rightPage.innerHTML = loadedPages[rightPageIndex]
