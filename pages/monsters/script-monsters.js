@@ -4,14 +4,14 @@ function goHome() {
   window.location.href = '../../index.html';
 }
 
-let monstersData = [];
+let monstersData = []; // creo array vuoto, che riempirò con risultato fetch, ossia dati per ciascun mostro
 
 function initMonsters() {
   fetch(BASE_URL)
     .then((response) => response.json())
     .then((result) => {
-      monstersData = result.results;
-      return displayMonsters(result.results);
+      monstersData = result.results;  // riempirò con risultato fetch, ossia dati per ciascun mostro
+      return displayMonsters(result.results); // prendo array di mostri
     });
 } 
 
@@ -22,9 +22,7 @@ function displayMonsters(monsters) {
     for (const monster of monsters) {
         const flipCardDiv = document.createElement("div"); // Creo il div che conterrà il singolo mostro
         flipCardDiv.className = "flip-card";
-        flipCardDiv.innerHTML = createMonsterTemplate(monster)
-        const img = flipCardDiv.querySelector('img')
-        
+        flipCardDiv.innerHTML = createMonsterTemplate(monster)        
         const seeMoreButton = flipCardDiv.querySelector(".see-more");
         seeMoreButton.onclick = () => goToMonsterPage(monster.index); // Aggiungo al bottone la funzione goToMonsterPage()
         monstersContainer.appendChild(flipCardDiv); // Aggiungo il div del mostro singolo al div che contiene tutti i mostri
@@ -45,7 +43,7 @@ function closeNav() {
 function search() {
   const inputSearch = document.getElementById("input-search");
   const text = inputSearch.value;
-  const filteredMonsters = monstersData.filter(monster => monster.name.toLowerCase().includes(text.toLowerCase()));
+  const filteredMonsters = monstersData.filter(monster => monster.name.toLowerCase().includes(text.toLowerCase())); // creo array con mostri cui nome contiene text input
  
   displayMonsters(filteredMonsters);
 }

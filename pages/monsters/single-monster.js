@@ -26,9 +26,9 @@ function goMonsters() {
 }
 
 function fillSmallArray(startingCreatureName, arrayLength) {  //arrayLenght 7
-    const indexInBig = monstersArrayNames.indexOf(startingCreatureName)
-    const startingDifference = Math.floor(arrayLength / 2)
-    let startingIndex = wrapAround(indexInBig - startingDifference, monstersArrayNames)
+    const indexInBig = monstersArrayNames.indexOf(startingCreatureName) // prende indice di creatura
+    const startingDifference = Math.floor(arrayLength / 2) // di quanto andare a sinistra nell'array grande
+    let startingIndex = wrapAround(indexInBig - startingDifference, monstersArrayNames) // con wraparound, invece che indice negativo, faccio il giro
     for (let i = 0; i < arrayLength; i++) {
         loadedPages.push(monstersArrayNames[startingIndex])
         startingIndex = wrapAround(++startingIndex, monstersArrayNames)
@@ -207,7 +207,7 @@ function fillCreatureText(infosArray, infoName, div) {
 }
 
 function init() {
-    const htmlParams = parseUrlParams();
+    const htmlParams = parseUrlParams(); // prendo mostro da pag precedente
     const monsterUrl = BASE_URL + htmlParams.name;
     fetch(monsterUrl)
         .then(response => response.json())
@@ -258,7 +258,6 @@ function closeNav() {
 }
 
 function fillMonsterPage(monster, pageID) {
-    console.log(monster);
     const monsterPage = document.getElementById(pageID)
     monsterPage.innerHTML = ''
     const monsterArray = Object.keys(monster);
@@ -324,7 +323,6 @@ function fillPages() {
     for (let i = 0; i < loadedPages.length; i++) {
         const id = 'monster' + (1 + i)
         const page = document.getElementById(id)
-        page.innerHTML = loadedPages[i]
         fetch(BASE_URL + loadedPages[i])
             .then(response => response.json())
             .then(result => fillMonsterPage(result, id))
@@ -373,8 +371,8 @@ function changeEnds(currentPos) {
     fetch(BASE_URL + loadedPages[rightPageIndex])
         .then(response => response.json())
         .then(result => fillMonsterPage(result, rightPage))
+    
+    console.log(loadedPages); 
+    console.log(pos);
 
-    leftPage.innerHTML = loadedPages[leftPageIndex]
-    rightPage.innerHTML = loadedPages[rightPageIndex]
-
-}
+} 
