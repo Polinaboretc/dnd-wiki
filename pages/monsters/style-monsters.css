@@ -23,10 +23,6 @@ body {
     border-top: 1px solid #DDD;
 }
 
-.navbar {
-    border-bottom: 2px solid #bc0f0f;
-}
-
 .accordion-button:not(.collapsed) {
     color: #bc0f0f;
     background-color: transparent;
@@ -35,7 +31,7 @@ body {
 
 .accordion-button:focus {
     border-color: #bc0f0f;
-    box-shadow: 0 0 0 0.25rem rgba(188, 15, 15, 0.25);
+    box-shadow: 0 0 0 0.25rem rgba(4, 4, 4, 0.25);
 }
 
 .accordion-monster-header {
