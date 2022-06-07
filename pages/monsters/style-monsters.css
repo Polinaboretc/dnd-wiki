@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 body {
-    background: #f9f9f9 url(./assets/body-background.jpg) repeat;
+    background: #f9f9f9 url(./assets/background/fuoco.jpeg);
     font-family: 'Roboto', sans-serif;
+    color: white;
 }
 
 .monsters-img {
@@ -22,6 +23,8 @@ body {
 .accordion-item:not(:first-of-type) {
     border-top: 1px solid #DDD;
 }
+
+
 
 .accordion-button:not(.collapsed) {
     color: #bc0f0f;
