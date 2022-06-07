@@ -9,11 +9,13 @@ function fillMonstersArrayNames() {
         .then(result => {
             for (const monster of result.results) {
                 monstersArrayNames.push(monster.index)
+                // console.log(monster.name); 
             }
             init();
         })
         .catch(error => console.log(error))
-}
+} 
+
 
 fillMonstersArrayNames(); 
 
@@ -36,11 +38,10 @@ function fillSmallArray(startingCreatureName, arrayLength) {  //arrayLenght 7
     for (let i = 0; i < startingDifference; i++) {
         loadedPages.push(loadedPages.shift())
     } 
-}
+} 
 
-// function autocomplete(inp, arr) { 
-//     console.log(monstersArrayNames); 
-
+// function autocomplete(inp, arr) {  
+    
 //     let currentFocus; 
 
 //     inp.addEventListener("input", function(e) { 
@@ -73,10 +74,56 @@ function fillSmallArray(startingCreatureName, arrayLength) {  //arrayLenght 7
 //         }
 
         
-//     })
+//     }); 
+
+//     inp.addEventListener("keydown", function(e){ 
+//         const x = document.getElementById(this.id + "autocomplete-list"); 
+//         if (x) x = x.getElementsByTagName("div"); 
+//         if (e.keyCode == 40){ 
+//             currentFocus ++; 
+//             addActive(x);
+//         } else if (e.keyCode == 38) {
+//             currentFocus --; 
+//             addActive(x);
+//         } else if (e.keyCode == 13) {
+//             e.preventDefault(); 
+//             if (currentFocus > -1) {
+//                 if (x) x[currentFocus].click();
+//             }
+//         }
+//     }); 
+
+//     function addActive(x) {
+//         if (!x) return false; 
+//         removeActive(x); 
+//         if(currentFocus >= x.length) currentFocus = 0; 
+//         if (currentFocus < 0) currentFocus = (x.length - 1); 
+
+//         x[currentFocus].classList.add("autocomplete-active");
+//     } 
+
+//     function removeActive(x) {
+//         for (let i = 0; i < x.length; i++) {
+//             x[i].classList.remove("autocomplete-active");
+//         }
+//     } 
+
+//     function closeAllLists(elmnt) {
+//         const x = document.getElementsByClassName("autocomplete-items"); 
+//         for (let i = 0; i < x.length; i++) {
+//             if (elmnt != x[i] && elmnt != inp) {
+//                 x[i].parentNode.removeChild(x[i]);   
+//             }
+            
+//         }
+//     } 
+
+//     document.addEventListener("click", function (e) {
+//         closeAllLists(e.target);
+//     });
 // }
 
-// autocomplete();
+// autocomplete(document.getElementById("input-search"), monstersArrayNames);
 
 function displayMonsterInfo(monster) {
     fillSmallArray(monster.index, 7)
@@ -256,20 +303,19 @@ function openNav() {
 function closeNav() {
     document.getElementById("mySidepanel").style.width = "0";
 }
-
 function fillMonsterPage(monster, pageID) {
     const monsterPage = document.getElementById(pageID)
     monsterPage.innerHTML = ''
     const monsterArray = Object.keys(monster);
-
+    
     const breadCrumbsTemplate = ` 
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-            <button class="breadcrumb-item breadcrumb-button" onclick="goHome()">Home</button>
-            <button class="breadcrumb-item breadcrumb-button" onclick="goMonsters()">Monsters</button>
-            <button class="breadcrumb-item active breadcrumb-button" aria-current="page">#MONSTERNAME</button>
-            </ol>
-            </nav>`
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+    <button class="breadcrumb-item breadcrumb-button" onclick="goHome()">Home</button>
+    <button class="breadcrumb-item breadcrumb-button" onclick="goMonsters()">Monsters</button>
+    <button class="breadcrumb-item active breadcrumb-button" aria-current="page">#MONSTERNAME</button>
+    </ol>
+    </nav>`
     const breadDiv = document.createElement('div');
     const breadCrumbsContainer = document.createElement('div');
     breadCrumbsContainer.className = 'breadcrumbs';
