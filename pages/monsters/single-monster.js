@@ -1,6 +1,7 @@
 const BASE_URL = "https://www.dnd5eapi.co/api/monsters/"; //Link a cui aggiungeremo l'index del mostro da cercare
 
 const monstersArrayNames = []
+const monstersArrayNamesNoIndex = []
 let loadedPages = []
 let pos = 0
 
@@ -8,9 +9,12 @@ function fillMonstersArrayNames() {
     fetch(BASE_URL).then(response => response.json())
         .then(result => {
             for (const monster of result.results) {
-                monstersArrayNames.push(monster.index)
+                monstersArrayNames.push(monster.index) 
+                monstersArrayNamesNoIndex.push(monster.name)
                 // console.log(monster.name); 
             }
+            console.log(monstersArrayNamesNoIndex);
+
             init();
         })
         .catch(error => console.log(error))
@@ -40,90 +44,90 @@ function fillSmallArray(startingCreatureName, arrayLength) {  //arrayLenght 7
     } 
 } 
 
-// function autocomplete(inp, arr) {  
+function autocomplete(inp, arr) { 
     
-//     let currentFocus; 
+    let currentFocus; 
 
-//     inp.addEventListener("input", function(e) { 
-//         let a, b, i, val = this.value; 
-//         closeAllLists(); 
+    inp.addEventListener("input", function(e) { 
+        let a, b, i, val = this.value; 
+        closeAllLists(); 
         
-//         if (!val){ return false;} 
+        if (!val){ return false;} 
         
         
-//         currentFocus = -1; 
-//         a = document.createElement("div"); 
-//         a.setAttribute("id", this.id + "autocomplete-list"); 
-//         a.setAttribute("class", "autocomplete-items"); 
-//         this.parentNode.appendChild(a); 
+        currentFocus = -1; 
+        a = document.createElement("div"); 
+        a.setAttribute("id", this.id + "autocomplete-list"); 
+        a.setAttribute("class", "autocomplete-items"); 
+        this.parentNode.appendChild(a); 
 
-//         for (let i = 0; i < arr.length; i++) {
-//             if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-//                 b = document.createElement("div"); 
-//                 b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>"; 
-//                 b.innerHTML += arr[i].substr(val.length); 
-//                 b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>"; 
-//                 b.addEventListener("click", function(e) {
-//                     inp.value = this.getElementsByTagName("input")[0].value; 
-//                     closeAllLists();
-//                 }); 
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                b = document.createElement("div"); 
+                b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>"; 
+                b.innerHTML += arr[i].substr(val.length); 
+                b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>"; 
+                b.addEventListener("click", function(e) {
+                    inp.value = this.getElementsByTagName("input")[0].value; 
+                    closeAllLists();
+                }); 
 
-//                 a.appendChild(b);
-//             }
+                a.appendChild(b);
+            }
             
-//         }
+        }
 
         
-//     }); 
+    }); 
 
-//     inp.addEventListener("keydown", function(e){ 
-//         const x = document.getElementById(this.id + "autocomplete-list"); 
-//         if (x) x = x.getElementsByTagName("div"); 
-//         if (e.keyCode == 40){ 
-//             currentFocus ++; 
-//             addActive(x);
-//         } else if (e.keyCode == 38) {
-//             currentFocus --; 
-//             addActive(x);
-//         } else if (e.keyCode == 13) {
-//             e.preventDefault(); 
-//             if (currentFocus > -1) {
-//                 if (x) x[currentFocus].click();
-//             }
-//         }
-//     }); 
+    inp.addEventListener("keydown", function(e){ 
+        const x = document.getElementById(this.id + "autocomplete-list"); 
+        if (x) x = x.getElementsByTagName("div"); 
+        if (e.keyCode == 40){ 
+            currentFocus ++; 
+            addActive(x);
+        } else if (e.keyCode == 38) {
+            currentFocus --; 
+            addActive(x);
+        } else if (e.keyCode == 13) {
+            e.preventDefault(); 
+            if (currentFocus > -1) {
+                if (x) x[currentFocus].click();
+            }
+        } 
 
-//     function addActive(x) {
-//         if (!x) return false; 
-//         removeActive(x); 
-//         if(currentFocus >= x.length) currentFocus = 0; 
-//         if (currentFocus < 0) currentFocus = (x.length - 1); 
+    }); 
 
-//         x[currentFocus].classList.add("autocomplete-active");
-//     } 
+    function addActive(x) {
+        if (!x) return false; 
+        removeActive(x); 
+        if(currentFocus >= x.length) currentFocus = 0; 
+        if (currentFocus < 0) currentFocus = (x.length - 1); 
 
-//     function removeActive(x) {
-//         for (let i = 0; i < x.length; i++) {
-//             x[i].classList.remove("autocomplete-active");
-//         }
-//     } 
+        x[currentFocus].classList.add("autocomplete-active");
+    } 
 
-//     function closeAllLists(elmnt) {
-//         const x = document.getElementsByClassName("autocomplete-items"); 
-//         for (let i = 0; i < x.length; i++) {
-//             if (elmnt != x[i] && elmnt != inp) {
-//                 x[i].parentNode.removeChild(x[i]);   
-//             }
+    function removeActive(x) {
+        for (let i = 0; i < x.length; i++) {
+            x[i].classList.remove("autocomplete-active");
+        }
+    } 
+
+    function closeAllLists(elmnt) {
+        const x = document.getElementsByClassName("autocomplete-items"); 
+        for (let i = 0; i < x.length; i++) {
+            if (elmnt != x[i] && elmnt != inp) {
+                x[i].parentNode.removeChild(x[i]);   
+            }
             
-//         }
-//     } 
+        }
+    } 
 
-//     document.addEventListener("click", function (e) {
-//         closeAllLists(e.target);
-//     });
-// }
+    document.addEventListener("click", function (e) {
+        closeAllLists(e.target);
+    });
+}
 
-// autocomplete(document.getElementById("input-search"), monstersArrayNames);
 
 function displayMonsterInfo(monster) {
     fillSmallArray(monster.index, 7)
@@ -254,6 +258,8 @@ function fillCreatureText(infosArray, infoName, div) {
 }
 
 function init() {
+    autocomplete(document.getElementById("input-search"), monstersArrayNamesNoIndex);
+
     const htmlParams = parseUrlParams(); // prendo mostro da pag precedente
     const monsterUrl = BASE_URL + htmlParams.name;
     fetch(monsterUrl)
