@@ -1,5 +1,4 @@
 const BASE_URL = "https://www.dnd5eapi.co/api/monsters";
-
 function goHome() {
   window.location.href = '../../index.html';
 }
@@ -11,6 +10,8 @@ function initMonsters() {
     .then((response) => response.json())
     .then((result) => {
       monstersData = result.results;  // riempirò con risultato fetch, ossia dati per ciascun mostro
+      console.log(monstersData)
+      createMonsterInfoJson()
       return displayMonsters(result.results); // prendo array di mostri
     });
 } 
@@ -94,3 +95,35 @@ function createMonsterTemplate(monster) {
 }
 
 initMonsters();
+
+function createMonsterInfoJson(){
+    let monstersInfoArray = []
+    for (const monster of monstersData) {
+        fetch(BASE_URL + '/' + monster.index)
+            .then(response => response.json())
+            .then(result => {
+                const obj = {
+                    name: result.name,
+                    alignment: result.alignment,
+                    size: result.size,
+                    type: result.type,
+                    hit_points: result.hit_points,
+                    armor_class: result.armor_class,
+                    hit_dice: result.hit_dice,
+                    xp: result.xp,
+                    challenge_rating: result.challenge_rating,
+                    charisma: result.charisma,
+                    constitution: result.constitution,
+                    dexterity: result.dexterity,
+                    intelligence: result.intelligence,
+                    strength: result.strength,
+                    wisdom: result.wisdom
+                }
+                monstersInfoArray.push(obj)
+            })
+            .catch(err => console.log(err))
+    }
+    const monsterArrayJson = JSON.stringify(monstersInfoArray)
+    
+    writeFile("monstersInfo.json", monsterArrayJson);
+}

@@ -262,7 +262,7 @@ function fillMonsterPage(monster, pageID) {
     statsDiv.innerHTML = fillCreatureStats(monster)
 
     const gridDiv = document.createElement('div')
-    const infosToPutInGrid = ['armor_class', 'hit_points', 'speed', 'proficiencies', 'damage_immunities', 'senses', 'challenge_rating', 'xp', 'hit_points', 'languages']
+    const infosToPutInGrid = [ 'hit_points','armor_class' ,'hit_dice','speed', 'proficiencies', 'damage_immunities', 'senses', 'challenge_rating', 'xp', 'languages']
     fillGrid(monster, infosToPutInGrid, gridDiv)
 
     const creatureText = document.createElement('div')
