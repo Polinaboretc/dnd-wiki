@@ -11,7 +11,7 @@ function initMonsters() {
     .then((result) => {
       monstersData = result.results;  // riempirò con risultato fetch, ossia dati per ciascun mostro
       console.log(monstersData)
-      createMonsterInfoJson()
+      //createMonsterInfoJson()
       return displayMonsters(result.results); // prendo array di mostri
     });
 } 
