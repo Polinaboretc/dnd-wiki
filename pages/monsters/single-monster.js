@@ -9,7 +9,6 @@ function fillMonstersArrayNames() {
         .then(result => {
             for (const monster of result.results) {
                 monstersArrayNames.push(monster.index)
-                // console.log(monster.name); 
             }
             init();
         })

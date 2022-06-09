@@ -1,4 +1,5 @@
 const BASE_URL = "https://www.dnd5eapi.co/api/monsters";
+let monstersJson = JSON.parse(data)
 function goHome() {
   window.location.href = '../../index.html';
 }
@@ -6,24 +7,23 @@ function goHome() {
 let monstersData = []; // creo array vuoto, che riempirò con risultato fetch, ossia dati per ciascun mostro
 
 function initMonsters() {
-  fetch(BASE_URL)
-    .then((response) => response.json())
-    .then((result) => {
-      monstersData = result.results;  // riempirò con risultato fetch, ossia dati per ciascun mostro
-      console.log(monstersData)
-      //createMonsterInfoJson()
-      return displayMonsters(result.results); // prendo array di mostri
-    });
+    fetch(BASE_URL)
+        .then((response) => response.json())
+        .then((result) => {
+            monstersData = result.results;  // riempirò con risultato fetch, ossia dati per ciascun mostro
+            return displayMonsters(result.results); // prendo array di mostri
+        });
 } 
 
 
 function displayMonsters(monsters) {
     const monstersContainer = document.getElementById("monsters-container");
     monstersContainer.innerHTML = "";
-    for (const monster of monsters) {
+    for (let i = 0; i < monsters.length; i++) {
+        const monster = monsters[i]
         const flipCardDiv = document.createElement("div"); // Creo il div che conterrà il singolo mostro
         flipCardDiv.className = "flip-card";
-        flipCardDiv.innerHTML = createMonsterTemplate(monster)        
+        flipCardDiv.innerHTML = createMonsterTemplate(monster,i)        
         const seeMoreButton = flipCardDiv.querySelector(".see-more");
         seeMoreButton.onclick = () => goToMonsterPage(monster.index); // Aggiungo al bottone la funzione goToMonsterPage()
         monstersContainer.appendChild(flipCardDiv); // Aggiungo il div del mostro singolo al div che contiene tutti i mostri
@@ -57,7 +57,9 @@ function goToMonsterPage(index) {
   window.location.href = urlString;
 }
 
-function createMonsterTemplate(monster) {
+function createMonsterTemplate(monster, index) {
+    const currentMonster = monstersJson[index]
+    const monsterInfo = currentMonster.size + ' ' + currentMonster.type + ' ' + currentMonster.alignment
     const monsterCardTemplate = `
     <div class="flip-card-inner">
             <div class="flip-card-front">
@@ -67,6 +69,11 @@ function createMonsterTemplate(monster) {
                 <div class="monster-name-container"><div>#MONSTERSNOME</div></div>
             </div>
             <div class="flip-card-back">
+                <div>#MONSTERSNOME</div>
+                <div>#MONSTER_INFOS</div>
+                <div class="stats-grid-div">#STATS_GRID</div>
+                <div>Xp: #XP</div>
+                <div>Challenge: #CHALLENGE</div>
                 <button class="see-more">+</button>
             </div>
         </div>`;
@@ -91,12 +98,34 @@ function createMonsterTemplate(monster) {
     return monsterCardTemplate
         .replace("#MONSTER_URL", monsterUrl)
         .replace("#MONSTER_ALT", monster.index)
-        .replace("#MONSTERSNOME", monster.name);
+        .replaceAll("#MONSTERSNOME", monster.name)
+        .replace('#XP', currentMonster.xp)
+        .replace('#MONSTER_INFOS', monsterInfo)
+        .replace('#STATS_GRID', fillCreatureStats(currentMonster))
+        .replace('#CHALLENGE', currentMonster.challenge_rating);
 }
+
+fontsize = function () {
+    var fontSize = document.getElementById('monsters-container').querySelectorAll(".stats-grid-div ").width() * 0.10; // 10% of container width
+    document.querySelectorAll(".monster-card-stats").css('font-size', fontSize);
+};
+
+function changeCardFontSize(){
+    const div = document.getElementById('monsters-container')
+    const cardWidth = div.querySelector('.stats-grid-div').clientWidth
+    const grids = document.getElementsByClassName('monster-card-stats')
+    const fontSize = cardWidth * 0.065
+    console.log(fontSize);
+    for (const grid of grids) {
+        grid.style.fontSize = `${fontSize}px`
+    }
+
+}
+window.addEventListener("resize", changeCardFontSize)
 
 initMonsters();
 
-function createMonsterInfoJson(){
+function createMonsterInfoJson(){ 
     let monstersInfoArray = []
     for (const monster of monstersData) {
         fetch(BASE_URL + '/' + monster.index)
@@ -123,7 +152,34 @@ function createMonsterInfoJson(){
             })
             .catch(err => console.log(err))
     }
-    const monsterArrayJson = JSON.stringify(monstersInfoArray)
-    
-    writeFile("monstersInfo.json", monsterArrayJson);
+}
+
+function fillCreatureStats(monster) {
+    const template = `
+    <table class="monster-card-stats">
+        <thead>
+            <tr class="">
+                <th>DEX</th>
+                <th>STR</th>
+                <th>INT</th>
+                <th>CON</th>
+                <th>WIS</th>
+                <th>CHA</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>#DEX</td>
+                <td>#STR</td>
+                <td>#INT</td>
+                <td>#CON</td>
+                <td>#WIS</td>
+                <td>#CHA</td>
+            </tr>
+        </tbody>
+</table>`
+    return template
+        .replace('#DEX', monster.dexterity).replace('#STR', monster.strength)
+        .replace('#INT', monster.intelligence).replace('#CON', monster.constitution)
+        .replace('#WIS', monster.wisdom).replace('#CHA', monster.charisma)
 }
