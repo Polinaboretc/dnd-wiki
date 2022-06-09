@@ -46,6 +46,8 @@ function fillSmallArray(startingCreatureName, arrayLength) {  //arrayLenght 7
 
 function autocomplete(inp, arr) { 
     
+    console.log('arr', arr);
+
     let currentFocus; 
 
     inp.addEventListener("input", function(e) { 
@@ -258,8 +260,9 @@ function fillCreatureText(infosArray, infoName, div) {
 }
 
 function init() {
-    autocomplete(document.getElementById("input-search"), monstersArrayNamesNoIndex);
-
+    let input = document.getElementById("input-search");
+    autocomplete(input, monstersArrayNamesNoIndex);
+    console.log('input', input)
     const htmlParams = parseUrlParams(); // prendo mostro da pag precedente
     const monsterUrl = BASE_URL + htmlParams.name;
     fetch(monsterUrl)
