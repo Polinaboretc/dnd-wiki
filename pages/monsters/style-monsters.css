@@ -218,16 +218,20 @@ body {
     width: 100%;
   }
 
-  .autocomplete-items {
-    position: absolute;
+  .autocomplete-items { 
+    overflow-y: scroll; 
+    max-height: 200px; 
+    height: fit-content;
+    width: 60%;
+    position: fixed; 
+    color: black;
     border: 1px solid #d4d4d4;
     border-bottom: none;
     border-top: none;
-    z-index: 99;
+    z-index: 99; 
     /*position the autocomplete items to be the same width as the container:*/
-    top: 100%;
-    left: 0;
-    right: 0;
+    bottom: 70px; 
+    border-radius: 10px;
   }
   .autocomplete-items div {
     padding: 10px;
