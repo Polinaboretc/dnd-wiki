@@ -64,6 +64,7 @@ function autocomplete(inp, arr) {
       return false;
     }
 
+
     currentFocus = -1;
     a = document.createElement("div");
     a.setAttribute("id", this.id + "autocomplete-list");
@@ -460,6 +461,7 @@ function fillMonsterPage(monster, pageID) {
     gridDiv,
     creatureText
   );
+
 }
 
 function wrapAround(index, array) {
