@@ -28,6 +28,7 @@ function displayMonsters(monsters) {
         seeMoreButton.onclick = () => goToMonsterPage(monster.index); // Aggiungo al bottone la funzione goToMonsterPage()
         monstersContainer.appendChild(flipCardDiv); // Aggiungo il div del mostro singolo al div che contiene tutti i mostri
     }
+    changeCardFontSize()
 }
 
 
@@ -111,21 +112,22 @@ fontsize = function () {
 };
 
 function changeCardFontSize(){
+    const styleTag = document.getElementById('my-style')
+    const styleTemplate = `
+    .flip-card { font-size: #CARD_BACK_SIZEpx }
+    .monster-card-stats { font-size: #STATS_FONT_SIZEpx !important }`
+
     const div = document.getElementById('monsters-container')
     const cardWidth = div.querySelector('.stats-grid-div').clientWidth
-    const grids = document.getElementsByClassName('monster-card-stats')
-    const fontSize = cardWidth * 0.065
-    console.log(fontSize);
-    for (const grid of grids) {
-        grid.style.fontSize = `${fontSize}px`
-    }
-
+    const gridFontSize = cardWidth * 0.065
+    const cardBackFontSize = cardWidth * 0.08
+    styleTag.innerHTML = styleTemplate.replace('#CARD_BACK_SIZE', cardBackFontSize).replace('#STATS_FONT_SIZE', gridFontSize)
 }
 window.addEventListener("resize", changeCardFontSize)
 
 initMonsters();
 
-function createMonsterInfoJson(){ 
+function createMonsterInfoJson(){ //Servito per generare il testo da inserire in monsterInfo.js
     let monstersInfoArray = []
     for (const monster of monstersData) {
         fetch(BASE_URL + '/' + monster.index)
