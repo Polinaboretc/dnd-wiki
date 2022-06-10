@@ -66,8 +66,9 @@ function autocomplete(inp, arr) {
         for (let i = 0; i < arr.length; i++) {
             if ((arr[i].toUpperCase()).includes(val.toUpperCase())) {
                 b = document.createElement("div"); 
-                b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>"; 
-                b.innerHTML += arr[i].substr(val.length); 
+                b.innerHTML = arr[i].toLowerCase().substring(0, arr[i].toLowerCase().indexOf(val.toLowerCase())) 
+                b.innerHTML += "<strong>" + arr[i].substring(arr[i].toLowerCase().indexOf(val.toLowerCase()),arr[i].toLowerCase().indexOf(val.toLowerCase())+val.length ) + "</strong>" 
+                b.innerHTML += arr[i].substring(arr[i].toLowerCase().indexOf(val.toLowerCase()) + val.length)
                 b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>"; 
                 b.addEventListener("click", function(e) {
                     inp.value = this.getElementsByTagName("input")[0].value; 
