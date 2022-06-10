@@ -4,7 +4,7 @@ const monstersArrayNames = [];
 const monstersArrayNamesNoIndex = [];
 let loadedPages = [];
 let pos = 0;
-
+let isSearchButtonOpened = false
 function fillMonstersArrayNames() {
   fetch(BASE_URL)
     .then((response) => response.json())
@@ -153,9 +153,9 @@ function saluta(parola){
 
 function goToMonsterPage(index) {
   let urlString = "./monster.html";
+  console.log(urlString);
   if (index) {
     urlString = urlString + "?name=" + index; // Passo tramite URL l'index del mostro così che la pagina successiva sappia che mostro abbiamo cliccato
-    console.log(urlString);
   }
   window.location.href = urlString;
 }
@@ -347,11 +347,18 @@ function createAccordionElement(infosArray, infoName) {
   return divAccordionContainer;
 }
 
+function searchButtonClicked(){
+  if(isSearchButtonOpened) {
+    closeNav();
+    isSearchButtonOpened = false;
+  } else {
+    openNav();
+    isSearchButtonOpened = true;
+  }
+}
 /* Set the width of the sidebar to 250px (show it) */
 function openNav() {
   document.getElementById("mySidepanel").style.width = "290px";
-  document.getElementById("open-button").style.zIndex = "0";
-  document.getElementById("close-button").style.zIndex = "-1";
 }
 
 /* Set the width of the sidebar to 0 (hide it) */
