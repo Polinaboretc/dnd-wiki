@@ -1,22 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Joan&display=swap');
 
 html, body{
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Joan', serif;
     background-image: url(./pages/monsters/assets/background/fuoco.jpeg);
-    color: white;
+    color: #ff2929;
 }
 .navbar {
-    border-bottom: 2px solid #bc0f0f;
+    border-bottom: 3px solid #bc0f0f;
 }
 
 .home-container{
     margin-top: 100px; 
     padding: 5px;
+    text-align: center;
 }
 .category-item{
     margin: 8px 5px;
-    box-shadow: 2px 2px 4px 1px #ddd;
 } 
+.list-group-item{
+    background-color: hwb(0deg 50% 50% / 60%);
+    color:white
+}
+
+
 
 
 

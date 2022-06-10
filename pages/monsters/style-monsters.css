@@ -266,3 +266,6 @@ input[type=search] {
     text-align: center;
     font-size: small;
 }
+.navbar {
+    border-bottom: 3px solid #bc0f0f;
+}
