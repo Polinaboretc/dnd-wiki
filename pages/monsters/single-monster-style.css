@@ -125,8 +125,21 @@ margin-top: 20px;
 .carousel-controller-style{ 
     top: 5%; 
     height: 15%;
+} 
+
+/* bottone sopra riultato autocomplete, porta a link corripondente a mostro */
+.go-to-autocompleted-page-button{ 
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px; 
+    background-color: transparent; 
+    border: none; 
+    
+}
+
 }
 .navbar {
     border-bottom: 3px solid #bc0f0f;
 }
-
