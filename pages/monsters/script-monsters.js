@@ -64,8 +64,8 @@ function createMonsterTemplate(monster, index) {
     const monsterCardTemplate = `
     <div class="flip-card-inner">
             <div class="flip-card-front">
-            <div class="img-container">
-            <img class="monster-img" src="#MONSTER_URL" onerror="./pictures/default.jpeg" alt="#MONSTER_ALT">
+            <div class="img-container" style="background-image:url(#MONSTER_URL)">
+            
                 </div>
                 <div class="monster-name-container"><div>#MONSTERSNOME</div></div>
             </div>
@@ -95,7 +95,7 @@ function createMonsterTemplate(monster, index) {
         monster.index === "werewolf-hybrid"
         ) {
             monsterUrl = "./pictures/default.jpeg";
-    } else  monsterUrl = "./pictures/" + monster.index + ".jpg";
+    } else  monsterUrl = "./pictures/" + monster.index + ".png";
     return monsterCardTemplate
         .replace("#MONSTER_URL", monsterUrl)
         .replace("#MONSTER_ALT", monster.index)

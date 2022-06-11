@@ -174,9 +174,9 @@ function parseUrlParams() {
 
 function fillCreatureStats(monster) {
   const template = `
-    <table class="table table-bordered bg-white text-center">
-        <thead>
-            <tr class="table-secondary">
+    <table class="table table-bordered border-secondary table-crystal text-center">
+        <thead class="table-default">
+            <tr class="">
                 <th>DEX</th>
                 <th>STR</th>
                 <th>INT</th>
@@ -207,7 +207,7 @@ function fillCreatureStats(monster) {
 
 function fillGrid(monster, gridInfos, div) {
   const table = document.createElement("table");
-  table.className = "table table-bordered table-hover bg-white";
+  table.className = "table table-bordered table-hover table-crystal border-secondary";
   table.innerHTML = fillTable(monster, gridInfos);
   div.appendChild(table);
 }
@@ -395,7 +395,7 @@ function fillMonsterPage(monster, pageID) {
   const imgDiv = document.createElement("div");
   const img = document.createElement("img");
   img.classList.add("img-creature");
-  let imgSrc = "./pictures/" + monster.index + ".jpg";
+  let imgSrc = "./pictures/" + monster.index + ".png";
   if (
     monster.index === "acolyte" ||
     monster.index === "giant-poisonous-snake" ||

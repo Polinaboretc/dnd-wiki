@@ -31,6 +31,7 @@ html, body {
 
 .creature-title{
     font-size: xx-large;
+    text-align: center;
 }
 
 .breadcrumb-button {
@@ -154,5 +155,26 @@ margin-top: 20px;
 }
 
 .navbar {
-    border-bottom: 3px solid #bc0f0f;
+    border-bottom: 2px solid #bc0f0f;
 }
+
+.table-crystal {
+    background-color: #2f2f2f80;
+    color: white;
+}
+
+.table-default{
+    background-color: #bc0f0f33;
+}
+.table{
+    --bs-table-hover-color: #bc0f0f;
+}
+
+.accordion{
+    --bs-accordion-border-color: #6d757d;
+    --bs-accordion-bg: #2f2f2f80;
+    --bs-accordion-btn-color: white;
+    --bs-accordion-color: white
+    
+}
+

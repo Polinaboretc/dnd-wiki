@@ -69,7 +69,8 @@ body {
 }
 
 .flip-card {
-    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.34);
+    border-radius: 8px;
     width: 100%;
     aspect-ratio: 4/5;
     /* perspective: 1000px; Remove this if you don't want the 3D effect */
@@ -103,31 +104,36 @@ body {
 
 /* Style the front side (fallback if image is missing) */
 .flip-card-front {
-    background-color: #bbb;
     color: black;
 }
 
 /* Style the back side */
 .flip-card-back {
     position: relative;
-    background-color: rgb(133, 0, 0);
+    background-color: #bc0f0f33;
     color: white;
     transform: rotateY(180deg);
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 6px;
 }
 
 .monster-name-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #bc0f0f;
+    background-color: #bc0f0f33;
     color: #DDD;
     height: 20%;
+    font-size: 16px;
 }
 
 .img-container {
-    background-color: white;
     width: 100%;
     height: 80%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
 }
 
 .monster-img {
@@ -272,6 +278,5 @@ input[type=search] {
     font-size: small;
 }
 .navbar {
-    border-bottom: 3px solid #bc0f0f;
+    border-bottom: 2px solid #bc0f0f;
 }
-
