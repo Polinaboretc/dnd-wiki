@@ -63,21 +63,22 @@ function createMonsterTemplate(monster, index) {
     const monsterInfo = currentMonster.size + ' ' + currentMonster.type + ' ' + currentMonster.alignment
     const monsterCardTemplate = `
     <div class="flip-card-inner">
-            <div class="flip-card-front">
-            <div class="img-container" style="background-image:url(#MONSTER_URL)">
-            
-                </div>
-                <div class="monster-name-container"><div>#MONSTERSNOME</div></div>
+        <div class="flip-card-front">
+        <div class="img-container" style="background-image:url(#MONSTER_URL)">
+        
             </div>
-            <div class="flip-card-back">
-                <div>#MONSTERSNOME</div>
+            <div class="monster-name-container"><div>#MONSTERSNOME</div></div>
+        </div>
+        <div class="flip-card-back">
+        
+                <div class="back-card-monster-name">#MONSTERSNOME</div>
                 <div>#MONSTER_INFOS</div>
                 <div class="stats-grid-div">#STATS_GRID</div>
                 <div>Xp: #XP</div>
                 <div>Challenge: #CHALLENGE</div>
-                <button class="see-more">+</button>
-            </div>
-        </div>`;
+                <button class="see-more">See more</button>
+        </div>
+    </div>`;
         
     let monsterUrl
     if (
@@ -115,13 +116,18 @@ function changeCardFontSize(){
     const styleTag = document.getElementById('my-style')
     const styleTemplate = `
     .flip-card { font-size: #CARD_BACK_SIZEpx }
-    .monster-card-stats { font-size: #STATS_FONT_SIZEpx !important }`
-
+    .monster-card-stats { font-size: #STATS_FONT_SIZEpx }
+    .back-card-monster-name { font-size: #CARD_BACK_NAME_SIZEpx }`
+    
     const div = document.getElementById('monsters-container')
     const cardWidth = div.querySelector('.stats-grid-div').clientWidth
     const gridFontSize = cardWidth * 0.065
     const cardBackFontSize = cardWidth * 0.08
-    styleTag.innerHTML = styleTemplate.replace('#CARD_BACK_SIZE', cardBackFontSize).replace('#STATS_FONT_SIZE', gridFontSize)
+    const cardBackNameSize = cardWidth * 0.1
+    styleTag.innerHTML = styleTemplate
+        .replace('#CARD_BACK_SIZE', cardBackFontSize)
+        .replace('#STATS_FONT_SIZE', gridFontSize)
+        .replace('#CARD_BACK_NAME_SIZE', cardBackNameSize)
 }
 window.addEventListener("resize", changeCardFontSize)
 
@@ -160,7 +166,7 @@ function fillCreatureStats(monster) {
     const template = `
     <table class="monster-card-stats">
         <thead>
-            <tr class="">
+            <tr>
                 <th>DEX</th>
                 <th>STR</th>
                 <th>INT</th>
