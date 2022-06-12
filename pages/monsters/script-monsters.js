@@ -116,12 +116,12 @@ function changeCardFontSize(){
     const styleTag = document.getElementById('my-style')
     const styleTemplate = `
     .flip-card { font-size: #CARD_BACK_SIZEpx }
-    .monster-card-stats { font-size: #STATS_FONT_SIZEpx }
+    .monster-card-stats{ font-size: #STATS_FONT_SIZEpx !important}
     .back-card-monster-name { font-size: #CARD_BACK_NAME_SIZEpx }`
     
     const div = document.getElementById('monsters-container')
     const cardWidth = div.querySelector('.stats-grid-div').clientWidth
-    const gridFontSize = cardWidth * 0.065
+    const gridFontSize = cardWidth * 0.07
     const cardBackFontSize = cardWidth * 0.08
     const cardBackNameSize = cardWidth * 0.1
     styleTag.innerHTML = styleTemplate
