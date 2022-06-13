@@ -53,7 +53,6 @@ function closeNav() {
   document.getElementById("mySidepanel").style.width = "0";
 }
 
-console.log(monstersData);
 // function search() {
 //   const inputSearch = document.getElementById("input-search");
 //   const text = inputSearch.value;
@@ -61,9 +60,7 @@ console.log(monstersData);
  
 //   displayMonsters(filteredMonsters);
 // } 
-console.log(monstersArrayNamesNoIndex);
 function autocomplete(inp, arr) {
-    console.log("arr", arr);
   
     let currentFocus;
   
@@ -161,13 +158,10 @@ function autocomplete(inp, arr) {
     });
   }
   
-  function saluta(parola){
-      console.log(parola, parola);
-  } 
+ 
 
   let input = document.getElementById("input-search");
   autocomplete(input, monstersArrayNamesNoIndex);
-  console.log("input", input);
 
 
 function goToMonsterPage(index) {
@@ -199,7 +193,6 @@ function searchButtonClicked(){
 
 function createMonsterTemplate(monster, index) {
     const currentMonster = monstersJson[index] 
-    console.log(currentMonster);
     const monsterInfo = currentMonster.size + ' ' + currentMonster.type + ' ' + currentMonster.alignment
     const monsterCardTemplate = `
     <div class="flip-card-inner">

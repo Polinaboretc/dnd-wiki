@@ -13,10 +13,7 @@ function fillMonstersArrayNames() {
       for (const monster of result.results) {
         monstersArrayNames.push(monster.index);
         monstersArrayNamesNoIndex.push(monster.name);
-        // console.log(monster.name);
       }
-      console.log(monstersArrayNamesNoIndex);
-
       init();
     })
     .catch((error) => console.log(error));
@@ -50,7 +47,6 @@ function fillSmallArray(startingCreatureName, arrayLength) {
 }
 
 function autocomplete(inp, arr) {
-  console.log("arr", arr);
 
   let currentFocus;
 
@@ -148,13 +144,9 @@ function autocomplete(inp, arr) {
   });
 }
 
-function saluta(parola){
-    console.log(parola, parola);
-}
 
 function goToMonsterPage(index) {
   let urlString = "./monster.html";
-  console.log(urlString);
   if (index) {
     urlString = urlString + "?name=" + index; // Passo tramite URL l'index del mostro così che la pagina successiva sappia che mostro abbiamo cliccato
   }
@@ -242,6 +234,8 @@ function fillTable(monster, gridInfos) {
           .replaceAll(/"|{|}|\[|\]|ft.|,/g, "")
           .replaceAll("_", " ");
       }
+    } else if(monster[info] === '') {
+        infoContent = "None. It's a " + monster.name.toLowerCase() + ", what did you expect?";
     } else {
       infoContent = monster[info];
     }
@@ -307,7 +301,6 @@ function fillCreatureText(infosArray, infoName, div) {
 function init() {
   let input = document.getElementById("input-search");
   autocomplete(input, monstersArrayNamesNoIndex);
-  console.log("input", input);
   const htmlParams = parseUrlParams(); // prendo mostro da pag precedente
   const monsterUrl = BASE_URL + htmlParams.name;
   fetch(monsterUrl)
@@ -479,7 +472,6 @@ function wrapAround(index, array) {
 function fillPages() {
   for (let i = 0; i < loadedPages.length; i++) {
     const id = "monster" + (1 + i);
-    const page = document.getElementById(id);
     fetch(BASE_URL + loadedPages[i])
       .then((response) => response.json())
       .then((result) => fillMonsterPage(result, id));
@@ -532,6 +524,4 @@ function changeEnds(currentPos) {
     .then((response) => response.json())
     .then((result) => fillMonsterPage(result, rightPage));
 
-  console.log(loadedPages);
-  console.log(pos);
 }
