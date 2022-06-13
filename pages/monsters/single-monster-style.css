@@ -13,7 +13,45 @@ html, body {
 }
 
 .accordion {
-    margin-bottom: 8px;
+    margin-bottom: 8px; 
+    --bs-accordion-border-color: #6d757d;
+    --bs-accordion-bg: #2f2f2f80;
+    --bs-accordion-btn-color: white;
+    --bs-accordion-color: white
+    
+} 
+
+.accordion-item:not(:first-of-type) {
+    border-top: 1px solid #DDD;
+}
+
+
+
+.accordion-button:not(.collapsed) {
+    color: #bc0f0f;
+    background-color: transparent;
+}
+
+
+.accordion-button:focus {
+    border-color: #bc0f0f;
+    box-shadow: 0 0 0 0.25rem rgba(4, 4, 4, 0.25);
+}
+
+.accordion-monster-header {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.btn-danger {
+    --bs-btn-bg: #bc0f0f;
+    --bs-btn-border-color: #bc0f0f;
+}
+
+.accordion-button::after {
+    content: unset;
 }
 
 .img-creature {
@@ -36,7 +74,8 @@ html, body {
 .breadcrumb-button {
     background-color: transparent;
     background-repeat: no-repeat;
-    border: none;
+    border: none; 
+    color: whitesmoke;
 }
 
 .info-name {
@@ -54,8 +93,6 @@ html, body {
 /*  ber il button toggle */
 
 .sidepanel { 
-    z-index: -1;
-    height: 45px;
     /* Specify a height */
     width: 0;
     /* 0 width - change this with JavaScript */
@@ -119,7 +156,8 @@ html, body {
 }
 
 .breadcrumbs{
-margin-top: 20px;
+margin-top: 20px; 
+
 }
 
 .container{
@@ -166,11 +204,6 @@ margin-top: 20px;
     }
 }
 
-.carousel-controller-style{ 
-    top: 5%; 
-    height: 15%;
-} 
-
 /* bottone sopra riultato autocomplete, porta a link corripondente a mostro */
 .go-to-autocompleted-page-button{ 
     position: absolute;
@@ -206,4 +239,5 @@ margin-top: 20px;
     --bs-accordion-btn-color: white;
     --bs-accordion-color: white
 }
+
 
