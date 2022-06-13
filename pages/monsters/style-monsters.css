@@ -69,8 +69,7 @@ body {
 }
 
 .flip-card {
-    background-color: rgba(0, 0, 0, 0.34);
-    border-radius: 8px;
+    
     width: 100%;
     aspect-ratio: 4/5;
     /* perspective: 1000px;   */
@@ -91,15 +90,17 @@ body {
     transform: rotateY(180deg);
 }
 
-/* .zoom:hover {
-    -ms-transform: scale(1.5); /* IE 9 */
-    /* -webkit-transform: scale(1.5); /* Safari 3-8 */
-    /* transform: scale(1.5); 
-  }  */ 
+.flip-card .monster-name-container {
+    transition: opacity 0.8s;
+    border-radius: 8px;
 
-/* .zoom{ 
-    transition: transform .2s; /* Animation */
-/* } */
+    opacity: 1;
+}
+
+.flip-card:hover .monster-name-container {
+    transition: opacity 0.8s;
+    opacity: 0;
+}
 
 /* Position the front and back side */
 .flip-card-front,
@@ -110,6 +111,8 @@ body {
     -webkit-backface-visibility: hidden;
     /* Safari */
     backface-visibility: hidden;
+    border-radius: 8px;
+
 }
 
 /* Style the front side (fallback if image is missing) */
@@ -120,12 +123,13 @@ body {
 /* Style the back side */
 .flip-card-back {
     position: relative;
-    background-color: #bc0f0f33;
+    background-color: #00000079;
     color: white;
-    transform: rotateY(180deg); 
-    border-radius: 8px;
-    font-size: 14px;
+    transform: rotateY(180deg);
     padding: 6px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
 }
 
 .monster-name-container {
@@ -135,10 +139,10 @@ body {
     background-color: #bc0f0f33;
     color: #DDD;
     height: 20%;
-    font-size: 16px;
 }
 
 .img-container {
+    border-radius: 8px 8px 0 0;
     width: 100%;
     height: 80%;
     background-size: contain;
@@ -152,11 +156,12 @@ body {
     object-fit: cover;
 }
 
+
+
 .see-more {
-    position: absolute;
     color: white;
-    width: 40px;
-    aspect-ratio: 1;
+    height: 16%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -251,24 +256,25 @@ input[type=search] {
     width: 100%;
 }
 
-  .autocomplete-items { 
-    overflow-y: scroll; 
-    max-height: 200px; 
+.autocomplete-items {
+    overflow-y: scroll;
+    max-height: 200px;
     height: fit-content;
     width: 60%;
-    position: fixed; 
+    position: fixed;
     color: black;
 
     border: 1px solid #d4d4d4;
     border-bottom: none;
     border-top: none;
-    z-index: 99; 
+    z-index: 99;
     /*position the autocomplete items to be the same width as the container:*/
 
-    bottom: 70px; 
+    bottom: 70px;
     border-radius: 10px;
-  }
-  .autocomplete-items div {
+}
+
+.autocomplete-items div {
     padding: 10px;
     cursor: pointer;
     background-color: #fff;
@@ -300,11 +306,17 @@ input[type=search] {
 }
 
 .monster-card-stats {
-    border: 1px solid black;
+    border: 1px solid rgb(255, 255, 255);
     width: 100px;
-    font-size: 10px;
 }
 
+.monster-card-stats th {
+    border-left: 1px solid rgb(255, 255, 255);
+}
+
+.monster-card-stats td {
+    border-left: 1px solid rgb(255, 255, 255);
+}
 
 .stats-grid-div {
     display: flex;
@@ -312,9 +324,9 @@ input[type=search] {
     flex-direction: column;
     width: 100%;
     text-align: center;
-    font-size: small;
 }
+
 .navbar {
     border-bottom: 2px solid #bc0f0f;
-} 
+}
 
