@@ -53,13 +53,6 @@ function closeNav() {
   document.getElementById("mySidepanel").style.width = "0";
 }
 
-// function search() {
-//   const inputSearch = document.getElementById("input-search");
-//   const text = inputSearch.value;
-//   const filteredMonsters = monstersData.filter(monster => monster.name.toLowerCase().includes(text.toLowerCase())); // creo array con mostri cui nome contiene text input
- 
-//   displayMonsters(filteredMonsters);
-// } 
 function autocomplete(inp, arr) {
   
     let currentFocus;
