@@ -152,6 +152,11 @@ margin-top: 20px;
         grid-column: 2;
         grid-row: 4;
     }
+
+    .img-creature{
+        max-height: 500px;
+        object-fit: contain;
+    }
     .stats-div{
         grid-column: 1;
         grid-row: 5;
