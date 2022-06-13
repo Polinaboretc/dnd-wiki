@@ -72,7 +72,8 @@ body {
     
     width: 100%;
     aspect-ratio: 4/5;
-    /* perspective: 1000px; Remove this if you don't want the 3D effect */
+    /* perspective: 1000px;   */
+    /* Remove this if you don't want the 3D effect */
 }
 
 .flip-card-inner {
@@ -100,7 +101,6 @@ body {
     transition: opacity 0.8s;
     opacity: 0;
 }
-
 
 /* Position the front and back side */
 .flip-card-front,
@@ -172,7 +172,8 @@ body {
     border-radius: 4px;
 }
 
-.sidepanel {
+.sidepanel { 
+    z-index: -1;
     height: 45px;
     /* Specify a height */
     width: 0;
@@ -202,6 +203,7 @@ body {
     bottom: -10px;
     right: 0px;
     color: rgba(213, 213, 213, 0);
+    z-index: 0;
 }
 
 /* Style the button that is used to open the sidepanel */
@@ -211,24 +213,36 @@ body {
     cursor: pointer;
     padding: 10px 15px;
     border: none;
-    background-color: rgb(213, 213, 213);
+    background-color: rgb(123, 37, 37);
     border-radius: 100%;
     position: fixed;
-    bottom: 20px;
-    right: 10px;
+    bottom: 15px;
+    right: 15px;
+    z-index: 1000; 
+    /* display: flex; 
+    align-items: center;
+    justify-content: center; */
 }
 
+.lord-icon{
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    left: -2px;
+    top: -2px;
+}
 .search-bar {
-    width: 190px;
+    width: 235px;
     margin-top: 2px;
-    margin-left: 2px;
+    margin-left: 8px;
 }
 
-.autocomplete {
+
+/* .autocomplete { */
     /*the container must be positioned relative:*/
-    position: relative;
+    /* position: relative;
     display: inline-block;
-}
+} */
 
 input {
     border: 1px solid transparent;
@@ -276,6 +290,19 @@ input[type=search] {
     /*when navigating through the items using the arrow keys:*/
     background-color: DodgerBlue !important;
     color: #ffffff;
+} 
+
+/* bottone sopra riultato autocomplete, porta a link corripondente a mostro */
+.go-to-autocompleted-page-button{ 
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px; 
+    background-color: transparent; 
+    border: none;  
+    width: 100%;
+    
 }
 
 .monster-card-stats {
@@ -302,3 +329,4 @@ input[type=search] {
 .navbar {
     border-bottom: 2px solid #bc0f0f;
 }
+

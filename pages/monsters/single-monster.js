@@ -4,7 +4,8 @@ const monstersArrayNames = [];
 const monstersArrayNamesNoIndex = [];
 let loadedPages = [];
 let pos = 0;
-let isSearchButtonOpened = false
+let isSearchButtonOpened = false 
+
 function fillMonstersArrayNames() {
   fetch(BASE_URL)
     .then((response) => response.json())

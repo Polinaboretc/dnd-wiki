@@ -1,20 +1,31 @@
 const BASE_URL = "https://www.dnd5eapi.co/api/monsters";
+
+const monstersArrayNamesNoIndex = []; 
+const monstersArrayNames = [];
+
 let monstersJson = JSON.parse(data)
+
 function goHome() {
   window.location.href = '../../index.html';
 }
 
-let monstersData = []; // creo array vuoto, che riempirò con risultato fetch, ossia dati per ciascun mostro
+let monstersData = []; // creo array vuoto, che riempirò con risultato fetch, ossia dati per ciascun mostro 
+
+let isSearchButtonOpened = false;
 
 function initMonsters() {
     fetch(BASE_URL)
         .then((response) => response.json())
         .then((result) => {
-            monstersData = result.results;  // riempirò con risultato fetch, ossia dati per ciascun mostro
+            monstersData = result.results;  // riempirò con risultato fetch, ossia dati per ciascun mostro 
+            for (const monster of result.results) {
+              monstersArrayNamesNoIndex.push(monster.name); 
+              monstersArrayNames.push(monster.index);
+
+            }
             return displayMonsters(result.results); // prendo array di mostri
         });
 } 
-
 
 function displayMonsters(monsters) {
     const monstersContainer = document.getElementById("monsters-container");
@@ -42,13 +53,122 @@ function closeNav() {
   document.getElementById("mySidepanel").style.width = "0";
 }
 
-function search() {
-  const inputSearch = document.getElementById("input-search");
-  const text = inputSearch.value;
-  const filteredMonsters = monstersData.filter(monster => monster.name.toLowerCase().includes(text.toLowerCase())); // creo array con mostri cui nome contiene text input
+console.log(monstersData);
+// function search() {
+//   const inputSearch = document.getElementById("input-search");
+//   const text = inputSearch.value;
+//   const filteredMonsters = monstersData.filter(monster => monster.name.toLowerCase().includes(text.toLowerCase())); // creo array con mostri cui nome contiene text input
  
-  displayMonsters(filteredMonsters);
-}
+//   displayMonsters(filteredMonsters);
+// } 
+console.log(monstersArrayNamesNoIndex);
+function autocomplete(inp, arr) {
+    console.log("arr", arr);
+  
+    let currentFocus;
+  
+    inp.addEventListener("input", function (e) {
+      let a,
+        b,
+        i,
+        val = this.value;
+      closeAllLists();
+  
+      if (!val) {
+        return false;
+      }
+  
+  
+      currentFocus = -1;
+      a = document.createElement("div");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      this.parentNode.appendChild(a);
+  
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i].toUpperCase().includes(val.toUpperCase())) {
+          b = document.createElement("div");
+          b.style.position = "relative";
+          b.innerHTML = arr[i]
+            .substring(0, arr[i].toLowerCase().indexOf(val.toLowerCase()));
+          b.innerHTML +=
+            "<strong>" +
+            arr[i].substring(
+              arr[i].toLowerCase().indexOf(val.toLowerCase()),
+              arr[i].toLowerCase().indexOf(val.toLowerCase()) + val.length
+            ) +
+            "</strong>";
+          b.innerHTML += arr[i].substring(
+            arr[i].toLowerCase().indexOf(val.toLowerCase()) + val.length
+          );
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          b.innerHTML += `<button class="go-to-autocompleted-page-button" > </button>`;
+          const goToPageButton = b.querySelector('.go-to-autocompleted-page-button')
+          goToPageButton.onclick = () => goToMonsterPage(monstersArrayNames[i])
+          b.addEventListener("click", function (e) {
+            inp.value = this.getElementsByTagName("input")[0].value;
+            closeAllLists();
+          });
+  
+          a.appendChild(b);
+        }
+      }
+    });
+  
+    inp.addEventListener("keydown", function (e) {
+      let x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        currentFocus++;
+        addActive(x);
+      } else if (e.keyCode == 38) {
+        currentFocus--;
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        e.preventDefault();
+        if (currentFocus > -1) {
+          if (x) x[currentFocus].click();
+        }
+      }
+    });
+  
+    function addActive(x) {
+      if (!x) return false;
+      removeActive(x);
+      if (currentFocus >= x.length) currentFocus = 0;
+      if (currentFocus < 0) currentFocus = x.length - 1;
+  
+      x[currentFocus].classList.add("autocomplete-active");
+    }
+  
+    function removeActive(x) {
+      for (let i = 0; i < x.length; i++) {
+        x[i].classList.remove("autocomplete-active");
+      }
+    }
+  
+    function closeAllLists(elmnt) {
+      const x = document.getElementsByClassName("autocomplete-items");
+      for (let i = 0; i < x.length; i++) {
+        if (elmnt != x[i] && elmnt != inp) {
+          x[i].parentNode.removeChild(x[i]);
+        }
+      }
+    }
+  
+    document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+    });
+  }
+  
+  function saluta(parola){
+      console.log(parola, parola);
+  } 
+
+  let input = document.getElementById("input-search");
+  autocomplete(input, monstersArrayNamesNoIndex);
+  console.log("input", input);
+
 
 function goToMonsterPage(index) {
   let urlString = "./monster.html";
@@ -56,10 +176,30 @@ function goToMonsterPage(index) {
     urlString = urlString + "?name=" + index; // Passo tramite URL l'index del mostro così che la pagina successiva sappia che mostro abbiamo cliccato
   }
   window.location.href = urlString;
-}
+} 
+
+function searchButtonClicked(){
+    if(isSearchButtonOpened) {
+      closeNav();
+      isSearchButtonOpened = false;
+    } else {
+      openNav();
+      isSearchButtonOpened = true;
+    }
+  }
+  /* Set the width of the sidebar to 250px (show it) */
+  function openNav() {
+    document.getElementById("mySidepanel").style.width = "290px";
+  }
+  
+  /* Set the width of the sidebar to 0 (hide it) */
+  function closeNav() {
+    document.getElementById("mySidepanel").style.width = "0";
+  }
 
 function createMonsterTemplate(monster, index) {
-    const currentMonster = monstersJson[index]
+    const currentMonster = monstersJson[index] 
+    console.log(currentMonster);
     const monsterInfo = currentMonster.size + ' ' + currentMonster.type + ' ' + currentMonster.alignment
     const monsterCardTemplate = `
     <div class="flip-card-inner">
