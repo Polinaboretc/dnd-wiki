@@ -1,5 +1,10 @@
 const BASE_URL = "https://www.dnd5eapi.co/api/monsters";
+
+const monstersArrayNamesNoIndex = []; 
+const monstersArrayNames = [];
+
 let monstersJson = JSON.parse(data)
+
 function goHome() {
   window.location.href = '../../index.html';
 }
@@ -12,11 +17,15 @@ function initMonsters() {
     fetch(BASE_URL)
         .then((response) => response.json())
         .then((result) => {
-            monstersData = result.results;  // riempirò con risultato fetch, ossia dati per ciascun mostro
+            monstersData = result.results;  // riempirò con risultato fetch, ossia dati per ciascun mostro 
+            for (const monster of result.results) {
+              monstersArrayNamesNoIndex.push(monster.name); 
+              monstersArrayNames.push(monster.index);
+
+            }
             return displayMonsters(result.results); // prendo array di mostri
         });
 } 
-
 
 function displayMonsters(monsters) {
     const monstersContainer = document.getElementById("monsters-container");
@@ -44,14 +53,15 @@ function closeNav() {
   document.getElementById("mySidepanel").style.width = "0";
 }
 
-function search() {
-  const inputSearch = document.getElementById("input-search");
-  const text = inputSearch.value;
-  const filteredMonsters = monstersData.filter(monster => monster.name.toLowerCase().includes(text.toLowerCase())); // creo array con mostri cui nome contiene text input
+console.log(monstersData);
+// function search() {
+//   const inputSearch = document.getElementById("input-search");
+//   const text = inputSearch.value;
+//   const filteredMonsters = monstersData.filter(monster => monster.name.toLowerCase().includes(text.toLowerCase())); // creo array con mostri cui nome contiene text input
  
-  displayMonsters(filteredMonsters);
-} 
-
+//   displayMonsters(filteredMonsters);
+// } 
+console.log(monstersArrayNamesNoIndex);
 function autocomplete(inp, arr) {
     console.log("arr", arr);
   
@@ -153,7 +163,12 @@ function autocomplete(inp, arr) {
   
   function saluta(parola){
       console.log(parola, parola);
-  }
+  } 
+
+  let input = document.getElementById("input-search");
+  autocomplete(input, monstersArrayNamesNoIndex);
+  console.log("input", input);
+
 
 function goToMonsterPage(index) {
   let urlString = "./monster.html";
@@ -183,7 +198,8 @@ function searchButtonClicked(){
   }
 
 function createMonsterTemplate(monster, index) {
-    const currentMonster = monstersJson[index]
+    const currentMonster = monstersJson[index] 
+    console.log(currentMonster);
     const monsterInfo = currentMonster.size + ' ' + currentMonster.type + ' ' + currentMonster.alignment
     const monsterCardTemplate = `
     <div class="flip-card-inner zoom">
