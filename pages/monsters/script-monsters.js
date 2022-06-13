@@ -247,7 +247,7 @@ function changeCardFontSize(){
     
     const div = document.getElementById('monsters-container')
     const cardWidth = div.querySelector('.stats-grid-div').clientWidth
-    const gridFontSize = cardWidth * 0.07
+    const gridFontSize = cardWidth * 0.06
     const cardBackFontSize = cardWidth * 0.08
     const cardBackNameSize = cardWidth * 0.1
     styleTag.innerHTML = styleTemplate
