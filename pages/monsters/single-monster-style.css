@@ -8,7 +8,6 @@ html, body {
     height: 30px;
 }
 
-
 .creature-info {
     font-style: italic;
 }
@@ -51,7 +50,6 @@ html, body {
 .info-name-tr {
     width: 30%;
 }
-
 
 /*  ber il button toggle */
 
@@ -130,10 +128,51 @@ margin-top: 20px;
     width: 100%;
 }
 
-
 .page{
     width: 100%;
     height: fit-content;
+    display: grid;
+}
+
+.bread-crumbs-div{
+}
+
+.grid-div{
+}
+
+.stats-div{
+}
+
+@media only screen and (min-width: 1000px) {
+    .page { 
+        grid-template-columns: auto auto;
+    }
+
+    .creature-title{
+        grid-column: 1/span 2;
+    }
+
+    .creature-info{
+        grid-column: 1/span 2;
+        text-align: center;
+    }
+    
+    .img-div { 
+        grid-column: 2;
+        grid-row: 4;
+    }
+    .stats-div{
+        grid-column: 1;
+        grid-row: 5;
+    }
+    
+    .grid-div{
+        grid-row: 4;
+    }
+
+    .creature-text-div{
+        grid-column: 1/span 2;
+    }
 }
 
 .carousel-controller-style{ 
@@ -151,7 +190,7 @@ margin-top: 20px;
     background-color: transparent; 
     border: none;  
     width: 100%;
-    
+
 }
 
 .navbar {
@@ -175,6 +214,5 @@ margin-top: 20px;
     --bs-accordion-bg: #2f2f2f80;
     --bs-accordion-btn-color: white;
     --bs-accordion-color: white
-    
 }
 
