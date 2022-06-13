@@ -219,8 +219,8 @@ input[type=search] {
 
 .autocomplete-items { 
     z-index: -1;
-    overflow-y: scroll;
     max-height: 150px;
+    overflow-y: scroll;
     height: fit-content;
     width: 60%;
     position: fixed;
@@ -256,6 +256,7 @@ input[type=search] {
 
 /* bottone sopra riultato autocomplete, porta a link corripondente a mostro */
 .go-to-autocompleted-page-button{ 
+    z-index: -1;
     position: absolute;
     top: 0px;
     right: 0px;

@@ -105,7 +105,8 @@ input[type=search] {
     width: 100%;
 }
 
-.autocomplete-items {
+.autocomplete-items { 
+    max-height: 150px;
     overflow-y: scroll;
     max-height: 200px;
     height: fit-content;
