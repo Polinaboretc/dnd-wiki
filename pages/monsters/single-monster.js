@@ -305,6 +305,9 @@ function init() {
         .then((response) => response.json())
         .then((result) => displayMonsterInfo(result))
         .catch((error) => console.log(error));
+// Ogni 0.5 secondi controllo la pagina attiva nel carosello, per evitare che pos e pagina attiva siano discrepanti.
+     setInterval(checkWhichPageIsActive, 500)  
+
 }
 
 function createAccordionElement(infosArray, infoName) {
@@ -525,4 +528,15 @@ function changeEnds(currentPos) {
         .then((response) => response.json())
         .then((result) => fillMonsterPage(result, rightPage));
 
+}
+
+function checkWhichPageIsActive(){
+    for(let i = 0; i < loadedPages.length; i++){
+        const page =  document.getElementById('monster' + (i + 1))
+        if(page.parentNode.classList.contains('active')){
+            // console.log(i+1);
+            pos = i
+            cycleSmallArray(pos)
+        }
+    }
 }

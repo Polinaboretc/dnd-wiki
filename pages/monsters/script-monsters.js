@@ -23,7 +23,8 @@ function initMonsters() {
               monstersArrayNames.push(monster.index);
 
             }
-            return displayMonsters(result.results); // prendo array di mostri
+            displayMonsters(result.results); // prendo array di mostri
+            
         });
 } 
 
@@ -317,3 +318,9 @@ function fillCreatureStats(monster) {
         .replace('#INT', monster.intelligence).replace('#CON', monster.constitution)
         .replace('#WIS', monster.wisdom).replace('#CHA', monster.charisma)
 }
+
+
+
+
+
+
