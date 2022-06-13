@@ -25,6 +25,10 @@ function initMonsters() {
         });
 } 
 
+function goHome() {
+  window.location.href = "../../index.html";
+}
+
 let isSearchButtonOpened = false;
 
 function goMonsters() {
