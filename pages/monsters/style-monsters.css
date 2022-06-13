@@ -20,44 +20,12 @@ body {
     box-shadow: 2px 2px 5px 1px #ddd;
 }
 
-.accordion-item:not(:first-of-type) {
-    border-top: 1px solid #DDD;
-}
-
-
-
-.accordion-button:not(.collapsed) {
-    color: #bc0f0f;
-    background-color: transparent;
-}
-
-
-.accordion-button:focus {
-    border-color: #bc0f0f;
-    box-shadow: 0 0 0 0.25rem rgba(4, 4, 4, 0.25);
-}
-
-.accordion-monster-header {
-    flex: 1;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.btn-danger {
-    --bs-btn-bg: #bc0f0f;
-    --bs-btn-border-color: #bc0f0f;
-}
-
-.accordion-button::after {
-    content: unset;
-}
-
 .breadcrumb-style {
     background-color: transparent;
     background-repeat: no-repeat;
     border: none;
-    margin-top: 100px;
+    margin-top: 100px; 
+    color: whitesmoke;
 }
 
 #monsters-container {
@@ -72,8 +40,6 @@ body {
     
     width: 100%;
     aspect-ratio: 4/5;
-    /* perspective: 1000px;   */
-    /* Remove this if you don't want the 3D effect */
 }
 
 .flip-card-inner {
@@ -173,8 +139,6 @@ body {
 }
 
 .sidepanel { 
-    z-index: -1;
-    height: 45px;
     /* Specify a height */
     width: 0;
     /* 0 width - change this with JavaScript */
@@ -219,9 +183,6 @@ body {
     bottom: 15px;
     right: 15px;
     z-index: 1000; 
-    /* display: flex; 
-    align-items: center;
-    justify-content: center; */
 }
 
 .lord-icon{
@@ -288,7 +249,7 @@ input[type=search] {
 
 .autocomplete-active {
     /*when navigating through the items using the arrow keys:*/
-    background-color: DodgerBlue !important;
+    background-color: rgb(123, 37, 37) !important;
     color: #ffffff;
 } 
 
@@ -307,11 +268,12 @@ input[type=search] {
 
 .monster-card-stats {
     border: 1px solid rgb(255, 255, 255);
-    width: 100px;
+    width: 100px; 
 }
 
 .monster-card-stats th {
-    border-left: 1px solid rgb(255, 255, 255);
+    border-left: 1px solid rgb(255, 255, 255); 
+    padding: 0px 3px;
 }
 
 .monster-card-stats td {
@@ -323,7 +285,8 @@ input[type=search] {
     align-items: center;
     flex-direction: column;
     width: 100%;
-    text-align: center;
+    text-align: center; 
+
 }
 
 .navbar {
