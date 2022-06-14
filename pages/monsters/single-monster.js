@@ -6,20 +6,20 @@ let loadedPages = [];
 let pos = 0;
 let isSearchButtonOpened = false
 
+fillMonstersArrayNames();
+
 function fillMonstersArrayNames() {
     fetch(BASE_URL)
         .then((response) => response.json())
         .then((result) => {
             for (const monster of result.results) {
-                monstersArrayNames.push(monster.index);
+                monstersArrayNames.push(monster.index); 
                 monstersArrayNamesNoIndex.push(monster.name);
             }
             init();
         })
         .catch((error) => console.log(error));
 }
-
-fillMonstersArrayNames();
 
 function goHome() {
     window.location.href = "../../index.html";
@@ -153,7 +153,7 @@ function goToMonsterPage(index) {
 }
 
 function displayMonsterInfo(monster) {
-    fillSmallArray(monster.index, 7);
+    fillSmallArray(monster.index, 7);  // riempe l'array loadedPages
     fillPages();
 }
 
