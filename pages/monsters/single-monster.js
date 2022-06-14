@@ -531,12 +531,13 @@ function changeEnds(currentPos) {
 }
 
 function checkWhichPageIsActive(){
+    const currentPos = pos
     for(let i = 0; i < loadedPages.length; i++){
         const page =  document.getElementById('monster' + (i + 1))
         if(page.parentNode.classList.contains('active')){
             // console.log(i+1);
             pos = i
-            cycleSmallArray(pos)
+            if(currentPos !== pos) cycleSmallArray(pos)
         }
     }
 }
