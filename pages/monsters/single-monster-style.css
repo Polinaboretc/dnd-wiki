@@ -54,8 +54,14 @@ html, body {
     content: unset;
 }
 
+.img-div{
+    display: flex;
+    justify-content: center;
+}
+
 .img-creature {
-    width: 100%;
+    max-width: 400px;
+    height: 250px;
 }
 
 .img-header {
@@ -165,6 +171,7 @@ margin-top: 20px;
     padding-top: 70px;
     height: 100%;
     width: 100%;
+    
 }
 
 .page{
@@ -193,8 +200,8 @@ margin-top: 20px;
     }
 
     .img-creature{
-        max-height: 500px;
-        object-fit: contain;
+        height: 500px;
+        width: auto;
     }
     .stats-div{
         grid-column: 1;
@@ -245,5 +252,47 @@ margin-top: 20px;
     --bs-accordion-btn-color: white;
     --bs-accordion-color: white
 }
+
+
+.carousel-control-prev{
+    background-image: url(./assets/arrow_back_ios_FILL0_wght400_GRAD0_opsz48.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 5%;
+    opacity: 0.1;
+    position: fixed;
+    margin-left: 20px;
+    
+}
+
+.carousel-control-prev:focus{
+    opacity: 0.1;
+}
+
+.carousel-control-prev:hover{
+    opacity: 1;
+}
+
+
+.carousel-control-next{
+    background-image: url(./assets/arrow_forward_ios_FILL0_wght400_GRAD0_opsz48.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 5%;
+    opacity: 0.1;
+    position: fixed;
+}
+
+.carousel-control-next:focus{
+    opacity: 0.1;
+}
+
+.carousel-control-next:hover{
+    opacity: 1;
+}
+
+
 
 
