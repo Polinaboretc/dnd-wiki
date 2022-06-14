@@ -24,6 +24,7 @@ html, body{
 }
 
 .sidepanel { 
+    height: 45px;
     /* Specify a height */
     width: 0;
     /* 0 width - change this with JavaScript */

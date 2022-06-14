@@ -93,12 +93,13 @@ html, body {
 /*  ber il button toggle */
 
 .sidepanel { 
+    height: 45px;
     /* Specify a height */
     width: 0;
     /* 0 width - change this with JavaScript */
     position: fixed;
     /* Stay in place */
-    z-index: 1;
+    z-index: -1;
     /* Stay on top */
     bottom: 23px;
     right: 25px;
